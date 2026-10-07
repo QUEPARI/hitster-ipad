@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Hitster iPad</title>
+  <meta name="theme-color" content="#0d0f14" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="setup" class="screen setup-screen">
+      <div class="setup-card">
+        <h1>Hitster Buzzer</h1>
+        <p class="muted">Single‑iPad versie</p>
+        <div class="segmented" id="playerCount">
+          <button data-count="2">2 spelers</button>
+          <button data-count="3">3 spelers</button>
+          <button data-count="4" class="active">4 spelers</button>
+        </div>
+        <div id="nameFields" class="name-fields"></div>
+        <button id="startGame" class="primary big">Start spel</button>
+      </div>
+    </section>
+
+    <section id="game" class="screen game-screen hidden">
+      <header class="topbar">
+        <button id="settingsBtn" class="ghost">Instellingen</button>
+      </header>
+
+      <div id="board" class="board players-4">
+        <button class="player-zone p1" data-player="0"></button>
+        <button class="player-zone p2" data-player="1"></button>
+        <button class="player-zone p3" data-player="2"></button>
+        <button class="player-zone p4" data-player="3"></button>
+
+        <div id="centerPanel" class="center-panel">
+          <div id="statusText" class="status-text">Klaar</div>
+          <div id="winnerView" class="winner-view hidden"></div>
+          <div id="questionView" class="question-wrap hidden">
+            <div id="winnerMini" class="winner-mini"></div>
+            <div id="questionBox" class="question-box">
+              <div id="questionText" class="question-text"></div>
+              <div id="timerText" class="timer-text"></div>
+            </div>
+            <button id="nextRound" class="primary next-round">Volgende ronde</button>
+          </div>
+          <button id="manualStart" class="primary center-start hidden">Start ronde</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head"><h2>Instellingen</h2><button class="close" data-close="settingsModal">×</button></div>
+      <label class="switch-row"><span>Automatisch doorspelen</span><input id="autoPlay" type="checkbox" checked><i></i></label>
+      <div class="theme-setting">
+        <span>Weergave</span>
+        <div class="theme-toggle" role="group" aria-label="Weergave">
+          <button type="button" id="darkModeBtn" class="theme-choice active">Dark</button>
+          <button type="button" id="lightModeBtn" class="theme-choice">Light</button>
+        </div>
+      </div>
+      <h3>Opdrachten</h3>
+      <div id="questionOptions" class="question-options"></div>
+      <button id="openParams" class="secondary full">Parameters</button>
+      <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
+    </div>
+  </div>
+
+  <div id="paramsModal" class="modal hidden">
+    <div class="modal-card compact">
+      <div class="modal-head"><h2>Parameters</h2><button class="close" data-close="paramsModal">×</button></div>
+      <label class="field">Winnaar in beeld (seconden)<input id="winnerSeconds" type="number" min="1" max="30" value="2"></label>
+      <label class="field">Opdrachttimer (seconden)<input id="questionSeconds" type="number" min="5" max="300" value="30"></label>
+      <label class="switch-row"><span>Timer tonen</span><input id="showTimer" type="checkbox" checked><i></i></label>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+    }
+  </script>
+</body>
+</html>
