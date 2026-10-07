@@ -525,3 +525,11 @@ html[data-theme="dark"] .settings-gear{
   stroke-linejoin:round;
   pointer-events:none;
 }
+
+
+/* v23 - harde modal-verbergregel */
+.modal.hidden{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}

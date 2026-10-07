@@ -53,3 +53,11 @@ v21 PWA:
 
 v22 PWA:
 - Versienummer zichtbaar op hoofdpagina naast Single‑iPad versie.
+
+
+v23 PWA:
+- JavaScript syntaxfout hersteld; app-logica draait weer.
+- Tandwiel verplaatst van setup naar het spel zelf.
+- Tandwiel is verborgen tijdens actieve buzzerfase en op de startpagina.
+- Modal verborgen-status extra afgedwongen.
+- Versie zichtbaar als v23 PWA.

@@ -1,4 +1,4 @@
-const APP_VERSION = 'v22 PWA';
+const APP_VERSION = 'v23 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -51,8 +51,9 @@ let settingsPausedQuestion = false;
 function updateSettingsGear(){
   const gear = document.getElementById('settingsGear');
   if(!gear) return;
-  // Niet zichtbaar zolang buzzerknoppen actief zijn.
-  gear.classList.toggle('hidden', state.phase === 'open' || state.phase === 'setup');
+  const gameVisible = !game.classList.contains('hidden');
+  const shouldHide = !gameVisible || state.phase === 'open' || state.phase === 'setup';
+  gear.classList.toggle('hidden', shouldHide);
 }
 
 function pauseQuestionForSettings(){
@@ -137,7 +138,10 @@ function renderQuestions(){const c=$('#questionOptions');c.innerHTML='';QUESTION
 function syncSettings(){state.auto=$('#autoPlay').checked;state.winnerSeconds=Math.max(1,+$('#winnerSeconds').value||2);state.questionSeconds=Math.max(5,+$('#questionSeconds').value||30);state.showTimer=$('#showTimer').checked;manualStart.classList.toggle('hidden',state.auto||state.phase==='open'||state.phase==='winner'||state.phase==='question')}
 ['autoPlay','winnerSeconds','questionSeconds','showTimer'].forEach(id=>$('#'+id).addEventListener('change',syncSettings));
 
-$('#openParams').onclick=()=>{$('#settingsModal').classList.add('hidden');$('#paramsModal').classList.remove('hidden')};
+$('#openParams').onclick=()=>{
+  $('#settingsModal').classList.add('hidden');
+  $('#paramsModal').classList.remove('hidden');
+};
 
 const settingsGear=document.getElementById('settingsGear');
 if(settingsGear){
@@ -210,7 +214,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
     state.timer=setTimeout(tick,250);
   };
   state.timer=setTimeout(tick,250);
-};state.timer=setTimeout(tick,1000)}
+}
 function format(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
