@@ -1,4 +1,4 @@
-const APP_VERSION = 'v19 PWA';
+const APP_VERSION = 'v20 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -127,7 +127,7 @@ function renderQuestions(){const c=$('#questionOptions');c.innerHTML='';QUESTION
 function syncSettings(){state.auto=$('#autoPlay').checked;state.winnerSeconds=Math.max(1,+$('#winnerSeconds').value||2);state.questionSeconds=Math.max(5,+$('#questionSeconds').value||30);state.showTimer=$('#showTimer').checked;manualStart.classList.toggle('hidden',state.auto||state.phase==='open'||state.phase==='winner'||state.phase==='question')}
 ['autoPlay','winnerSeconds','questionSeconds','showTimer'].forEach(id=>$('#'+id).addEventListener('change',syncSettings));
 
-$('#openParams').onclick=()=>{$('#settingsModal').classList.add('hidden');$('#paramsModal').classList.remove('hidden')};$('#paramsModal').classList.remove('hidden')};
+$('#openParams').onclick=()=>{$('#settingsModal').classList.add('hidden');$('#paramsModal').classList.remove('hidden')};
 
 const settingsGear=document.getElementById('settingsGear');
 if(settingsGear){

@@ -498,3 +498,11 @@ html[data-theme="dark"] .settings-gear{
   color:#ffffff;
   border-color:#343b48;
 }
+
+
+/* v20 - eenvoudiger tandwiel */
+.settings-gear{
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI Symbol","Apple Symbols","Noto Sans Symbols",sans-serif !important;
+  font-size:26px !important;
+  font-weight:700;
+}

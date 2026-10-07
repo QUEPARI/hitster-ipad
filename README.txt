@@ -34,3 +34,10 @@ v19 PWA:
 - Automatisch doorspelen verplaatst naar Parameters.
 - Reset spel sluit de popup direct.
 - Versienummer: v19 PWA.
+
+
+v20 PWA:
+- Herstelt fout waarbij Parameters onbedoeld automatisch opende.
+- Donkere overlay bij opstart opgelost.
+- Tandwiel vereenvoudigd.
+- Versienummer bijgewerkt naar v20 PWA.
