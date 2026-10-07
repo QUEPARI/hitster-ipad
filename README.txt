@@ -14,3 +14,6 @@ Installatie op iPad:
 4. Open Hitster Buzzer vanaf het nieuwe beginscherm-icoon.
 5. Open hem daarna één keer terwijl de site nog bereikbaar is om te controleren dat de cache compleet is.
 6. Daarna kan de oorspronkelijke server/hosting uit; het spel werkt offline.
+
+
+v17: Vraag-/winnaarlaag gecentreerd voor geïnstalleerde iPad PWA, inclusief safe-area.

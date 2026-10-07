@@ -1,4 +1,4 @@
-const CACHE = "hitster-ipad-v16-1";
+const CACHE = "hitster-ipad-v16-1-v17";
 const ASSETS = [
   "./",
   "./index.html",

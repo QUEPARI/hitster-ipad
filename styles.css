@@ -326,3 +326,56 @@ html[data-theme="light"] .danger{
   color:#ffffff !important;
   border:1px solid #d83c3c !important;
 }
+
+
+/* v17 PWA - vraag exact gecentreerd op iPad */
+.game-screen{
+  position:relative;
+  min-height:100dvh;
+}
+
+.board{
+  position:relative;
+}
+
+.center-panel{
+  position:absolute !important;
+  inset:0 !important;
+  left:auto !important;
+  top:auto !important;
+  transform:none !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex-direction:column !important;
+
+  width:100% !important;
+  height:100% !important;
+
+  padding:
+    max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+
+  pointer-events:none;
+}
+
+.center-panel > *{
+  pointer-events:auto;
+}
+
+.question-wrap{
+  margin:auto !important;
+}
+
+@media (display-mode: standalone){
+  .center-panel{
+    padding:
+      max(8px, env(safe-area-inset-top))
+      max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-left));
+  }
+}
