@@ -24,3 +24,13 @@ v18 PWA:
 - Light mode behoudt lichte grijze kaarten.
 - Versienummer zichtbaar onderaan Instellingen: v18 PWA.
 - Service worker cache opnieuw verhoogd voor duidelijkere update.
+
+
+v19 PWA:
+- Instellingenknop vervangen door tandwiel midden onder.
+- Tandwiel verborgen tijdens actieve buzzerfase; spelerknoppen vullen dan het hele scherm.
+- Openen Instellingen pauzeert een lopende vraagtimer; sluiten hervat deze.
+- Naamveld wordt leeg bij focus wanneer nog de standaardnaam Speler 1/2/3/4 staat.
+- Automatisch doorspelen verplaatst naar Parameters.
+- Reset spel sluit de popup direct.
+- Versienummer: v19 PWA.

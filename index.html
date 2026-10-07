@@ -26,12 +26,11 @@
         <div id="nameFields" class="name-fields"></div>
         <button id="startGame" class="primary big">Start spel</button>
       </div>
+      <button id="settingsGear" class="settings-gear" aria-label="Instellingen" title="Instellingen">⚙</button>
     </section>
 
     <section id="game" class="screen game-screen hidden">
-      <header class="topbar">
-        <button id="settingsBtn" class="ghost">Instellingen</button>
-      </header>
+      <header class="topbar"></header>
 
       <div id="board" class="board players-4">
         <button class="player-zone p1" data-player="0"></button>
@@ -59,7 +58,6 @@
   <div id="settingsModal" class="modal hidden">
     <div class="modal-card">
       <div class="modal-head"><h2>Instellingen</h2><button class="close" data-close="settingsModal">×</button></div>
-      <label class="switch-row"><span>Automatisch doorspelen</span><input id="autoPlay" type="checkbox" checked><i></i></label>
       <div class="theme-setting">
         <span>Weergave</span>
         <div class="theme-toggle" role="group" aria-label="Weergave">
@@ -72,7 +70,7 @@
       <button id="openParams" class="secondary full">Parameters</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v18 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v19 PWA</div>
 
     </div>
   </div>
@@ -80,6 +78,7 @@
   <div id="paramsModal" class="modal hidden">
     <div class="modal-card compact">
       <div class="modal-head"><h2>Parameters</h2><button class="close" data-close="paramsModal">×</button></div>
+      <label class="switch-row"><span>Automatisch doorspelen</span><input id="autoPlay" type="checkbox" checked><i></i></label>
       <label class="field">Winnaar in beeld (seconden)<input id="winnerSeconds" type="number" min="1" max="30" value="2"></label>
       <label class="field">Opdrachttimer (seconden)<input id="questionSeconds" type="number" min="5" max="300" value="30"></label>
       <label class="switch-row"><span>Timer tonen</span><input id="showTimer" type="checkbox" checked><i></i></label>

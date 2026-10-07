@@ -440,3 +440,61 @@ html[data-theme="light"] .app-version{
   color:#687382;
   border:1px solid #d9dee6;
 }
+
+
+/* v19 - buzzer full screen + instellingen tandwiel */
+.game-screen{
+  grid-template-rows:1fr !important;
+  position:relative;
+}
+
+.topbar{
+  display:none !important;
+}
+
+.board{
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(8px, env(safe-area-inset-right))
+    max(8px, env(safe-area-inset-bottom))
+    max(8px, env(safe-area-inset-left)) !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+}
+
+.settings-gear{
+  position:absolute;
+  z-index:60;
+  left:50%;
+  bottom:max(14px, env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  color:var(--text);
+  font-size:30px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.20);
+  padding:0;
+}
+
+.settings-gear.hidden{
+  display:none !important;
+}
+
+html[data-theme="light"] .settings-gear{
+  background:#ffffff;
+  color:#161a20;
+  border-color:#cbd3dd;
+}
+
+html[data-theme="dark"] .settings-gear{
+  background:#20252f;
+  color:#ffffff;
+  border-color:#343b48;
+}
