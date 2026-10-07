@@ -1,4 +1,4 @@
-const APP_VERSION = 'v24 PWA';
+const APP_VERSION = 'v25 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -31,9 +31,7 @@ function setTheme(theme){
 
 function forceCloseAllModals(){
   const settingsModal = document.getElementById('settingsModal');
-  const paramsModal = document.getElementById('paramsModal');
   if(settingsModal) settingsModal.classList.add('hidden');
-  if(paramsModal) paramsModal.classList.add('hidden');
 }
 forceCloseAllModals();
 window.addEventListener('pageshow', forceCloseAllModals);
@@ -77,8 +75,7 @@ function resumeQuestionAfterSettings(){
   timerText.classList.toggle('hidden', !state.showTimer);
 
   if(left <= 0){
-    if(state.auto) startRound();
-    else showIdle();
+    startRound();
     return;
   }
 
@@ -135,13 +132,13 @@ function renderNameFields(){
 $$('#playerCount button').forEach(b=>b.onclick=()=>{state.count=+b.dataset.count;$$('#playerCount button').forEach(x=>x.classList.toggle('active',x===b));renderNameFields()});renderNameFields();
 function renderQuestions(){const c=$('#questionOptions');c.innerHTML='';QUESTIONS.forEach(q=>{const l=document.createElement('label');l.className='question-check';l.innerHTML=`<input type="checkbox" ${state.active.has(q.id)?'checked':''}><span>${q.text}</span>`;const inp=l.querySelector('input');inp.onchange=()=>{if(inp.checked)state.active.add(q.id);else{if(state.active.size===1){inp.checked=true;return}state.active.delete(q.id)}state.bag=[]};c.appendChild(l)})}renderQuestions();
 
-function syncSettings(){state.auto=$('#autoPlay').checked;state.winnerSeconds=Math.max(1,+$('#winnerSeconds').value||2);state.questionSeconds=Math.max(5,+$('#questionSeconds').value||30);state.showTimer=$('#showTimer').checked;manualStart.classList.toggle('hidden',state.auto||state.phase==='open'||state.phase==='winner'||state.phase==='question')}
-['autoPlay','winnerSeconds','questionSeconds','showTimer'].forEach(id=>$('#'+id).addEventListener('change',syncSettings));
-
-$('#openParams').onclick=()=>{
-  $('#settingsModal').classList.add('hidden');
-  $('#paramsModal').classList.remove('hidden');
-};
+function syncSettings(){
+  state.auto=true;
+  state.winnerSeconds=2;
+  state.questionSeconds=Math.max(5,+$('#questionSeconds').value||30);
+  state.showTimer=$('#showTimer').checked;
+  manualStart.classList.add('hidden');
+}
 
 const settingsGear=document.getElementById('settingsGear');
 if(settingsGear){
@@ -154,26 +151,31 @@ if(settingsGear){
 $$('[data-close]').forEach(b=>{
   b.onclick=()=>{
     $('#'+b.dataset.close).classList.add('hidden');
-    // Alleen hervatten wanneer geen andere instellingen-popup open staat.
-    const settingsOpen=!$('#settingsModal').classList.contains('hidden');
-    const paramsOpen=!$('#paramsModal').classList.contains('hidden');
-    if(!settingsOpen && !paramsOpen) resumeQuestionAfterSettings();
+    resumeQuestionAfterSettings();
   };
 });
 
+const saveSettingsBtn=document.getElementById('saveSettings');
+if(saveSettingsBtn){
+  saveSettingsBtn.onclick=()=>{
+    syncSettings();
+    $('#settingsModal').classList.add('hidden');
+    resumeQuestionAfterSettings();
+  };
+}
+
 $('#resetBtn').onclick=()=>{
   $('#settingsModal').classList.add('hidden');
-  $('#paramsModal').classList.add('hidden');
   settingsPausedQuestion=false;
   pausedQuestionRemaining=null;
   resetToSetup();
 };
-$('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();if(state.auto)startRound();else showIdle()};
-function showIdle(){clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.toggle('hidden',state.auto)}
+$('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
+function showIdle(){clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
 function startRound(){clearTimers();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
-function chooseWinner(i){state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,state.winnerSeconds*1000)}
+function chooseWinner(i){state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
 function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=state.question?.id;let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
 function nextQuestion(){if(!state.bag.length)refillBag();return state.bag.shift()}
 
@@ -208,7 +210,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
     if(state.showTimer)timerText.textContent=format(remaining);
     if(remaining<=0){
       questionDeadline=null;
-      if(state.auto)startRound();else showIdle();
+      startRound();
       return;
     }
     state.timer=setTimeout(tick,250);

@@ -68,3 +68,12 @@ v24 PWA:
 - Tandwiel alleen zichtbaar wanneer de vraag in beeld staat.
 - Tandwiel verborgen tijdens buzzerfase en winnaarweergave.
 - Versie bijgewerkt naar v24 PWA.
+
+
+v25 PWA:
+- Automatisch doorspelen staat altijd aan en is niet meer instelbaar.
+- Winnaar wordt standaard en vast 2 seconden getoond.
+- Parameters staan nu direct in Instellingen onder Opdrachten.
+- Aparte Parameters-popup verwijderd.
+- Groene Opslaan-knop toegevoegd; deze past instellingen toe en sluit de popup.
+- Versie bijgewerkt naar v25 PWA.

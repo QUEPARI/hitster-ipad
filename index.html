@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#0d0f14" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=24" />
+  <link rel="manifest" href="./manifest.webmanifest?v=25" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=24" />
+  <link rel="stylesheet" href="./styles.css?v=25" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1>Hitster Buzzer</h1>
-        <p class="muted">Single‑iPad versie · v24 PWA</p>
+        <p class="muted">Single‑iPad versie · v25 PWA</p>
         <div class="segmented" id="playerCount">
           <button data-count="2">2 spelers</button>
           <button data-count="3">3 spelers</button>
@@ -70,30 +70,25 @@
           <button type="button" id="lightModeBtn" class="theme-choice">Light</button>
         </div>
       </div>
+
       <h3>Opdrachten</h3>
       <div id="questionOptions" class="question-options"></div>
-      <button id="openParams" class="secondary full">Parameters</button>
-      <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v24 PWA</div>
-
-    </div>
-  </div>
-
-  <div id="paramsModal" class="modal hidden">
-    <div class="modal-card compact">
-      <div class="modal-head"><h2>Parameters</h2><button class="close" data-close="paramsModal">×</button></div>
-      <label class="switch-row"><span>Automatisch doorspelen</span><input id="autoPlay" type="checkbox" checked><i></i></label>
-      <label class="field">Winnaar in beeld (seconden)<input id="winnerSeconds" type="number" min="1" max="30" value="2"></label>
+      <h3>Parameters</h3>
       <label class="field">Opdrachttimer (seconden)<input id="questionSeconds" type="number" min="5" max="300" value="30"></label>
       <label class="switch-row"><span>Timer tonen</span><input id="showTimer" type="checkbox" checked><i></i></label>
+
+      <button id="saveSettings" class="save-settings full">Opslaan</button>
+      <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
+
+      <div class="app-version" id="appVersion">Versie: v25 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=24"></script>
+  <script src="./app.js?v=25"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=24'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=25'));
     }
   </script>
 </body>

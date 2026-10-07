@@ -547,3 +547,19 @@ html[data-theme="dark"] .settings-gear{
   fill:currentColor !important;
   stroke:none !important;
 }
+
+
+/* v25 - samengevoegde instellingen */
+.save-settings{
+  margin-top:16px;
+  background:#2e9d57 !important;
+  color:#ffffff !important;
+  border:1px solid #2e9d57 !important;
+  border-radius:14px;
+  padding:14px 18px;
+  font-weight:900;
+  font-size:18px;
+}
+.save-settings:active{
+  transform:scale(.99);
+}
