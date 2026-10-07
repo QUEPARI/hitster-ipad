@@ -41,3 +41,11 @@ v20 PWA:
 - Donkere overlay bij opstart opgelost.
 - Tandwiel vereenvoudigd.
 - Versienummer bijgewerkt naar v20 PWA.
+
+
+v21 PWA:
+- Popup-startstatus hard gereset; beide modals starten altijd gesloten.
+- CSS en JS hebben versiegebonden URLs om oude iPad-cache te omzeilen.
+- Service worker gebruikt network-first voor pagina-navigatie.
+- Eenvoudig minimalistisch instellingen-icoon als SVG.
+- Versienummer v21 PWA.

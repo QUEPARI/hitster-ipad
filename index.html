@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#0d0f14" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="manifest" href="./manifest.webmanifest?v=21" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles.css?v=21" />
 </head>
 <body>
   <main id="app">
@@ -26,7 +26,12 @@
         <div id="nameFields" class="name-fields"></div>
         <button id="startGame" class="primary big">Start spel</button>
       </div>
-      <button id="settingsGear" class="settings-gear" aria-label="Instellingen" title="Instellingen">&#9881;&#65038;</button>
+      <button id="settingsGear" class="settings-gear" aria-label="Instellingen" title="Instellingen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.2"></circle>
+          <path d="M12 3.5v2.1M12 18.4v2.1M3.5 12h2.1M18.4 12h2.1M6 6l1.5 1.5M16.5 16.5L18 18M18 6l-1.5 1.5M7.5 16.5L6 18"></path>
+        </svg>
+      </button>
     </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -70,7 +75,7 @@
       <button id="openParams" class="secondary full">Parameters</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v20 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v21 PWA</div>
 
     </div>
   </div>
@@ -85,10 +90,10 @@
     </div>
   </div>
 
-  <script src="./app.js"></script>
+  <script src="./app.js?v=21"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=21'));
     }
   </script>
 </body>

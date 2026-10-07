@@ -1,4 +1,4 @@
-const APP_VERSION = 'v20 PWA';
+const APP_VERSION = 'v21 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -27,6 +27,16 @@ function setTheme(theme){
   const saved = localStorage.getItem('hitster-ipad-theme');
   setTheme(saved === 'light' ? 'light' : 'dark');
 }
+
+
+function forceCloseAllModals(){
+  const settingsModal = document.getElementById('settingsModal');
+  const paramsModal = document.getElementById('paramsModal');
+  if(settingsModal) settingsModal.classList.add('hidden');
+  if(paramsModal) paramsModal.classList.add('hidden');
+}
+forceCloseAllModals();
+window.addEventListener('pageshow', forceCloseAllModals);
 
 const darkModeBtn = document.getElementById('darkModeBtn');
 const lightModeBtn = document.getElementById('lightModeBtn');
@@ -212,4 +222,10 @@ window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToO
 document.addEventListener('DOMContentLoaded',()=>{
   const versionEl=document.getElementById('appVersion');
   if(versionEl) versionEl.textContent='Versie: '+APP_VERSION;
+});
+
+
+// v21: defensieve startstatus
+document.addEventListener('DOMContentLoaded', ()=>{
+  forceCloseAllModals();
 });

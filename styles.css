@@ -506,3 +506,22 @@ html[data-theme="dark"] .settings-gear{
   font-size:26px !important;
   font-weight:700;
 }
+
+
+/* v21 - eenvoudige instellingenknop */
+.settings-gear{
+  width:54px !important;
+  height:54px !important;
+  border-radius:50% !important;
+  padding:0 !important;
+}
+.settings-gear svg{
+  width:27px;
+  height:27px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  pointer-events:none;
+}
