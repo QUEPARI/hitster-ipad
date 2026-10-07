@@ -61,3 +61,10 @@ v23 PWA:
 - Tandwiel is verborgen tijdens actieve buzzerfase en op de startpagina.
 - Modal verborgen-status extra afgedwongen.
 - Versie zichtbaar als v23 PWA.
+
+
+v24 PWA:
+- Aangeleverde tandwiel-SVG gebruikt.
+- Tandwiel alleen zichtbaar wanneer de vraag in beeld staat.
+- Tandwiel verborgen tijdens buzzerfase en winnaarweergave.
+- Versie bijgewerkt naar v24 PWA.

@@ -533,3 +533,17 @@ html[data-theme="dark"] .settings-gear{
   visibility:hidden !important;
   pointer-events:none !important;
 }
+
+
+/* v24 - aangeleverd tandwiel, alleen tijdens vraagfase */
+.settings-gear svg{
+  width:26px !important;
+  height:26px !important;
+  display:block;
+  fill:currentColor !important;
+  stroke:none !important;
+}
+.settings-gear svg path{
+  fill:currentColor !important;
+  stroke:none !important;
+}
