@@ -49,3 +49,7 @@ v21 PWA:
 - Service worker gebruikt network-first voor pagina-navigatie.
 - Eenvoudig minimalistisch instellingen-icoon als SVG.
 - Versienummer v21 PWA.
+
+
+v22 PWA:
+- Versienummer zichtbaar op hoofdpagina naast Single‑iPad versie.

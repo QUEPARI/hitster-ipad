@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#0d0f14" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=21" />
+  <link rel="manifest" href="./manifest.webmanifest?v=22" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=21" />
+  <link rel="stylesheet" href="./styles.css?v=22" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1>Hitster Buzzer</h1>
-        <p class="muted">Single‑iPad versie</p>
+        <p class="muted">Single‑iPad versie · v22 PWA</p>
         <div class="segmented" id="playerCount">
           <button data-count="2">2 spelers</button>
           <button data-count="3">3 spelers</button>
@@ -75,7 +75,7 @@
       <button id="openParams" class="secondary full">Parameters</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v21 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v22 PWA</div>
 
     </div>
   </div>
@@ -90,10 +90,10 @@
     </div>
   </div>
 
-  <script src="./app.js?v=21"></script>
+  <script src="./app.js?v=22"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=21'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=22'));
     }
   </script>
 </body>
