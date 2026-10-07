@@ -17,3 +17,10 @@ Installatie op iPad:
 
 
 v17: Vraag-/winnaarlaag gecentreerd voor geïnstalleerde iPad PWA, inclusief safe-area.
+
+
+v18 PWA:
+- Dark mode instellingen hebben nu afzonderlijke donkergrijze kaarten/ballonnen.
+- Light mode behoudt lichte grijze kaarten.
+- Versienummer zichtbaar onderaan Instellingen: v18 PWA.
+- Service worker cache opnieuw verhoogd voor duidelijkere update.

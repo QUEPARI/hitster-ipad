@@ -1,3 +1,4 @@
+const APP_VERSION = 'v18 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -76,3 +77,9 @@ function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=nul
 function resetToSetup(){clearTimers();state.phase='setup';game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
 
 window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToOneLine()});
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const versionEl=document.getElementById('appVersion');
+  if(versionEl) versionEl.textContent='Versie: '+APP_VERSION;
+});

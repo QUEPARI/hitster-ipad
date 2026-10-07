@@ -379,3 +379,64 @@ html[data-theme="light"] .danger{
       max(8px, env(safe-area-inset-left));
   }
 }
+
+
+/* v18 - duidelijkere instellingen en versienummer */
+html[data-theme="dark"] .question-check,
+html[data-theme="dark"] .switch-row,
+html[data-theme="dark"] .theme-setting,
+html[data-theme="dark"] .field{
+  background:#20252f !important;
+  border:1px solid #343b48 !important;
+  border-radius:14px !important;
+  padding:14px !important;
+  color:#ffffff !important;
+}
+
+html[data-theme="dark"] .question-check:hover,
+html[data-theme="dark"] .switch-row:hover,
+html[data-theme="dark"] .theme-setting:hover{
+  background:#262c37 !important;
+}
+
+html[data-theme="light"] .question-check,
+html[data-theme="light"] .switch-row,
+html[data-theme="light"] .theme-setting,
+html[data-theme="light"] .field{
+  background:#eef2f6 !important;
+  border:1px solid #d7dde5 !important;
+  border-radius:14px !important;
+  padding:14px !important;
+  color:#161a20 !important;
+}
+
+.question-options{
+  display:grid;
+  gap:10px !important;
+}
+
+.field{
+  margin:12px 0 !important;
+}
+
+.app-version{
+  margin-top:18px;
+  padding:10px 12px;
+  text-align:center;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.02em;
+  border-radius:10px;
+}
+
+html[data-theme="dark"] .app-version{
+  background:#11151b;
+  color:#9da7b4;
+  border:1px solid #2d3440;
+}
+
+html[data-theme="light"] .app-version{
+  background:#f3f5f8;
+  color:#687382;
+  border:1px solid #d9dee6;
+}
