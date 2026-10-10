@@ -1,4 +1,4 @@
-const APP_VERSION = 'v33 PWA';
+const APP_VERSION = 'v34 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -10,7 +10,52 @@ const QUESTIONS=[
 ];
 const state={count:4,names:['Speler 1','Speler 2','Speler 3','Speler 4'],phase:'setup',winner:null,question:null,bag:[],timer:null,auto:true,winnerSeconds:2,questionSeconds:30,showTimer:true,active:new Set(QUESTIONS.map(q=>q.id))};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusText'),winnerView=$('#winnerView'),questionView=$('#questionView'),winnerMini=$('#winnerMini'),questionBox=$('#questionBox'),questionText=$('#questionText'),timerText=$('#timerText'),nextRound=$('#nextRound'),manualStart=$('#manualStart');
+const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusText'),winnerView=$('#winnerView'),questionView=$('#questionView'),winnerMini=$('#winnerMini'),questionBox=$('#questionBox'),questionText=$('#questionText'),timerText=$('#timerText'),nextRound=$('#nextRound'),manualStart=$('#manualStart'),timeoutSequence=$('#timeoutSequence'),timeUpText=$('#timeUpText'),discoStage=$('#discoStage'),discoBall=$('#discoBall'),discoExplosion=$('#discoExplosion');
+
+
+function hideTimeoutSequence(){
+  if(!timeoutSequence) return;
+  timeoutSequence.classList.add('hidden');
+  timeUpText?.classList.add('hidden');
+  discoStage?.classList.add('hidden');
+  discoStage?.classList.remove('drop-in');
+  discoBall?.classList.remove('explode');
+  discoExplosion?.classList.add('hidden');
+  discoExplosion?.classList.remove('explode');
+}
+
+function showTimeoutSequence(){
+  clearQuestionTension();
+  clearTimers();
+  state.phase='timeout';
+  updateSettingsGear();
+  statusText.classList.add('hidden');
+  winnerView.classList.add('hidden');
+  questionView.classList.add('hidden');
+  manualStart.classList.add('hidden');
+  $$('.player-zone').forEach(z=>z.classList.add('disabled'));
+
+  hideTimeoutSequence();
+  timeoutSequence.classList.remove('hidden');
+  timeUpText.classList.remove('hidden');
+
+  state.timer=setTimeout(()=>{
+    timeUpText.classList.add('hidden');
+    discoStage.classList.remove('hidden');
+    discoStage.classList.add('drop-in');
+
+    state.timer=setTimeout(()=>{
+      discoBall.classList.add('explode');
+      discoExplosion.classList.remove('hidden');
+      discoExplosion.classList.add('explode');
+
+      state.timer=setTimeout(()=>{
+        hideTimeoutSequence();
+        startRound();
+      }, 900);
+    }, 1300);
+  }, 1500);
+}
 
 function setTheme(theme){
   const next = theme === 'light' ? 'light' : 'dark';
@@ -181,8 +226,8 @@ $('#resetBtn').onclick=()=>{
   resetToSetup();
 };
 $('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');updateSettingsGear();board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
-function showIdle(){clearQuestionTension();clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
-function startRound(){clearQuestionTension();clearTimers();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
+function showIdle(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
+function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
 function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
@@ -321,7 +366,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
     updateQuestionTension();
     if(remaining<=0){
       questionDeadline=null;
-      startRound();
+      showTimeoutSequence();
       return;
     }
     state.timer=setTimeout(tick,250);
@@ -331,7 +376,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
 function format(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
-function resetToSetup(){clearQuestionTension();clearTimers();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
+function resetToSetup(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
 
 window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToOneLine()});
 

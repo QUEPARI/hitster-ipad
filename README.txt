@@ -130,3 +130,10 @@ v33 PWA:
 - Timer-spanning volledig frame-gebaseerd gemaakt met requestAnimationFrame.
 - Pulsfrequentie en intensiteit lopen continu op van 10 naar 0 seconden.
 - Geen sprongen meer bij hele seconden of wisselende CSS-animation-duration.
+
+
+v34 PWA:
+- Na afloop van de timer verschijnt eerst 1,5 seconde 'TIJD IS OP!'.
+- Daarna valt een draaiende discobal vanaf boven in beeld.
+- Zodra de discobal volledig in beeld is, explodeert die.
+- Na de explosie start automatisch opnieuw de buzzerfase.
