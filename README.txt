@@ -178,3 +178,10 @@ v40 PWA:
 - Hitster mode opnieuw verfijnd met meer neon roze/blauw uitstraling op basis van logo/verpakking.
 - Donkerblauwe/zwarte basis behouden.
 - Buzzerknoppen gewijzigd naar paars, blauw, geel en oranje.
+
+
+v41 PWA:
+- Officiële neonkleuren toegepast: roze #E5007D, blauw #009EE3, geel #FFED00, oranje #E94C15.
+- Bij 2 spelers: roze/blauw. Bij 3 spelers: roze/blauw/geel.
+- Bij 4 spelers: roze/blauw/geel/oranje.
+- Oude speler-3/speler-4 kleuren expliciet overschreven, inclusief de iPad-weergave.
