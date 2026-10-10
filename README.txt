@@ -157,3 +157,10 @@ v37 PWA:
 - Hitster-modus gebruikt een energieke party-look met zwart, gebroken wit, geel en roze accenten.
 - Dark en Light blijven ongewijzigd beschikbaar.
 - Gekozen thema wordt opgeslagen.
+
+
+v38 PWA:
+- Hitster mode volledig opnieuw opgebouwd vanaf Dark mode.
+- Donkere achtergrond, donkere panelen, donkere invulvelden en donkere knoppen.
+- Gele en roze Hitster-achtige accenten blijven als merk-/partylaag.
+- Vraagvelden behouden hun functionele kleur, maar krijgen een donkerder omlijsting.
