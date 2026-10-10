@@ -620,3 +620,21 @@ html[data-theme="dark"] .settings-gear{
 #game .settings-gear{
   display:flex;
 }
+
+
+/* v28 - gerichte fixes tandwiel + groene startknop */
+#game .settings-gear{
+  display:flex !important;
+}
+#game .settings-gear.hidden{
+  display:none !important;
+}
+
+html[data-theme="dark"] #startGame.start-game-green,
+html[data-theme="light"] #startGame.start-game-green,
+#startGame.start-game-green{
+  background:#2e9d57 !important;
+  color:#ffffff !important;
+  border:1px solid #2e9d57 !important;
+  box-shadow:none !important;
+}

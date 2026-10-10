@@ -93,3 +93,9 @@ v27 PWA:
 - Normale Instellingen-knop boven Start spel op het beginscherm.
 - Start spel knop groen gemaakt.
 - Versie bijgewerkt naar v27 PWA.
+
+
+v28 PWA:
+- Oude CSS-regel die het tandwiel in het spel verborg overschreven.
+- Tandwiel is nu zichtbaar tijdens de vraagfase en verborgen in andere fases.
+- Start spel wordt in zowel Dark als Light mode geforceerd groen weergegeven.
