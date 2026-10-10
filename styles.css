@@ -1565,3 +1565,52 @@ html[data-theme="hitster"] .question-box.is-light-question #questionText{
 
 /* v47: Chrome Android foutmelding bij startprobleem */
 .start-error{color:#ffb2c1;font-size:13px;text-align:center;margin:10px 0 0;overflow-wrap:anywhere;}
+
+
+/* v48: centreer de spelernaamvelden en de ingevoerde tekst. */
+html[data-theme="hitster"] .name-fields {
+  justify-items:center;
+}
+html[data-theme="hitster"] .name-fields input {
+  text-align:center;
+  margin-inline:auto;
+}
+html[data-theme="hitster"] .name-fields input::placeholder {
+  text-align:center;
+}
+
+/* v48: dezelfde roze neonletters als BUZZER voor winnaar en TIJD IS OM. */
+html[data-theme="hitster"] .winner-view,
+html[data-theme="hitster"] .time-up-text {
+  font-family:"Helvetica Neue","Segoe UI Light","Arial Narrow",Arial,sans-serif !important;
+  font-weight:200 !important;
+  font-style:normal !important;
+  letter-spacing:.10em !important;
+  line-height:1.2 !important;
+  color:#FFB7E0 !important;
+  -webkit-text-stroke:.65px #FFE6F4;
+  text-shadow:0 0 2px #FFF,0 0 6px #E5007D,0 0 13px #E5007D,0 0 24px rgba(229,0,125,.8) !important;
+  text-transform:uppercase;
+}
+html[data-theme="hitster"] .winner-view {
+  font-size:clamp(30px,6vw,82px) !important;
+  overflow-wrap:anywhere;
+  max-width:100%;
+}
+html[data-theme="hitster"] .time-up-text {
+  font-size:clamp(37px,6.2vw,84px) !important;
+  text-align:center;
+  padding:0 16px;
+}
+/* Transparant, breder logo met natuurlijke verhouding. */
+.setup-brand .hitster-logo {
+  width:min(100%,clamp(230px,38vh,345px));
+  max-height:17vh;
+  object-fit:contain;
+}
+@media (max-height:720px){
+  html[data-theme="hitster"] .setup-brand .hitster-logo {
+    width:min(100%,205px);
+    max-height:65px;
+  }
+}

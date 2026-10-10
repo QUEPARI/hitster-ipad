@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=47" />
+  <link rel="manifest" href="./manifest.webmanifest?v=48" />
   <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=47" />
+  <link rel="stylesheet" href="./styles.css?v=48" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1 class="setup-brand" aria-label="Hitster Buzzer">
-          <img class="hitster-logo" src="./hitster-logo.png?v=47" alt="Hitster" />
+          <img class="hitster-logo" src="./hitster-logo-v48.png?v=48" alt="Hitster" />
           <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
         </h1>
         <div class="player-count-label">Aantal spelers</div>
@@ -37,7 +37,7 @@
         </div>
         <p id="startError" class="start-error hidden" role="alert"></p>
       </div>
-      <div class="setup-version">V47 PWA</div>
+      <div class="setup-version">V48 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -94,10 +94,10 @@
     </div>
   </div>
 
-  <script src="./app.js?v=47"></script>
+  <script src="./app.js?v=48"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=47'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=48'));
     }
   </script>
 </body>

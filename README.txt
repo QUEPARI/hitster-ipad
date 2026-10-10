@@ -203,3 +203,10 @@ v46 PWA (gebaseerd op v44): TIJD IS OM!; origineel logo uit v43 teruggezet.
 
 
 v47 PWA: Android compatibiliteit: geen optional chaining/nullish coalescing, defensieve Start spel-handler, foutmelding bij mislukte start.
+
+
+v48 PWA:
+- Naamvelden en ingevoerde spelersnamen gecentreerd.
+- Nieuw transparant Hitster-logo (hitster-logo-v48.png).
+- TIJD IS OM en de winnaar getoond in de roze neonstijl van BUZZER.
+- Android-aanpassingen uit v47 behouden.
