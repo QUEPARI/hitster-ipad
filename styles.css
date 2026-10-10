@@ -1647,3 +1647,36 @@ html[data-theme="hitster"] #winnerView{
     0 0 13px var(--winner-color,#E5007D),
     0 0 24px var(--winner-color,#E5007D) !important;
 }
+
+
+/* v52: winner uses the SAME typography, size and animation as TIJD IS OM.
+   Only the neon color varies with the player. */
+html[data-theme="hitster"] #winnerView,
+html[data-theme="hitster"] #timeUpText{
+  font-family:"Helvetica Neue","Segoe UI Light","Arial Narrow",Arial,sans-serif !important;
+  font-size:clamp(37px,6.2vw,84px) !important;
+  font-weight:200 !important;
+  font-style:normal !important;
+  letter-spacing:.10em !important;
+  line-height:1.2 !important;
+  text-transform:uppercase !important;
+  text-align:center !important;
+  padding:0 16px !important;
+  box-sizing:border-box !important;
+  max-width:calc(100vw - 32px) !important;
+  overflow-wrap:break-word;
+  animation:timeup-pop 1.5s ease both;
+}
+html[data-theme="hitster"] #winnerView{
+  --neon-tone:var(--winner-color,#E5007D);
+  color:var(--neon-tone) !important;
+  -webkit-text-stroke:.65px var(--neon-tone) !important;
+  text-shadow:0 0 2px var(--neon-tone),0 0 6px var(--neon-tone),0 0 13px var(--neon-tone),0 0 24px var(--neon-tone) !important;
+}
+html[data-theme="hitster"] #board.winner-phase .center-panel{
+  width:calc(100vw - 32px);
+  max-width:none;
+}
+/* Android hit-testing: keep the start action on top of visual decoration. */
+#setup .setup-actions{position:relative;z-index:5;}
+#setup #startGame{position:relative;z-index:6;pointer-events:auto;touch-action:manipulation;cursor:pointer;}

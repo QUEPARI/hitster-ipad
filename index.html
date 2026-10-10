@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=51" />
+  <link rel="manifest" href="./manifest.webmanifest?v=52" />
   <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=51" />
+  <link rel="stylesheet" href="./styles.css?v=52" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1 class="setup-brand" aria-label="Hitster Buzzer">
-          <img class="hitster-logo" src="./hitster-logo-v48.png?v=51" alt="Hitster" />
+          <img class="hitster-logo" src="./hitster-logo-v48.png?v=52" alt="Hitster" />
           <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
         </h1>
         <div class="player-count-label">Aantal spelers</div>
@@ -37,7 +37,7 @@
         </div>
         <p id="startError" class="start-error hidden" role="alert"></p>
       </div>
-      <div class="setup-version">V51 PWA</div>
+      <div class="setup-version">V52 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -90,7 +90,7 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v51 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v52 PWA</div>
     </div>
   </div>
 
@@ -128,10 +128,10 @@
       }, 1200);
     });
   </script>
-  <script src="./app.js?v=51"></script>
+  <script src="./app.js?v=52"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=51'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=52'));
     }
   </script>
 </body>

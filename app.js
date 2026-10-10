@@ -1,4 +1,4 @@
-const APP_VERSION = 'v51 PWA';
+const APP_VERSION = 'v52 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -217,19 +217,29 @@ function startGameSafely(){
     if(window.console && console.error) console.error('Hitster start error',err);
   }
 }
+// v52: support both Android touchend and regular click; prevent duplicate starts.
 const startGameButton=$('#startGame');
+let lastStartActivation=0;
+function activateStart(event){
+  if(event && event.cancelable && event.type==='touchend') event.preventDefault();
+  const now=Date.now();
+  if(now-lastStartActivation<850) return;
+  lastStartActivation=now;
+  window.__hitsterStartClicked=true;
+  const errorEl=document.getElementById('startError');
+  if(errorEl) errorEl.classList.add('hidden');
+  startGameSafely();
+}
 if(startGameButton){
-  startGameButton.addEventListener('click',function(event){
-    window.__hitsterStartClicked=true;
-    startGameSafely();
-  });
+  startGameButton.addEventListener('touchend',activateStart,{passive:false});
+  startGameButton.addEventListener('click',activateStart);
 }
 
-function showIdle(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
+function showIdle(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');board.classList.remove('winner-phase');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
 function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
-function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.remove('winner');z.classList.add('disabled','phase-hidden')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];
+function chooseWinner(i){clearQuestionTension();state.phase='winner';board.classList.add('winner-phase');updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.remove('winner');z.classList.add('disabled','phase-hidden')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];
 const playerColors=['#E5007D','#009EE3','#FFED00','#E94C15'];
 const winnerColor=playerColors[i]||playerColors[0];
 winnerView.style.setProperty('--winner-color',winnerColor);
@@ -355,7 +365,7 @@ function clearQuestionTension(){
   if(state.question) questionBox.style.background=state.question.color;
 }
 
-function showQuestion(){state.phase='question';updateSettingsGear();state.question=nextQuestion();winnerView.classList.add('hidden');$$('.player-zone').forEach(z=>z.classList.add('phase-hidden'));winnerMini.textContent=state.names[state.winner];questionText.textContent=state.question.text;questionBox.style.background=state.question.color;questionBox.style.color=state.question.dark?'#111':'#fff';questionBox.classList.toggle('is-light-question',!!state.question.dark);questionView.classList.remove('hidden');fitQuestionToOneLine();requestAnimationFrame(fitQuestionToOneLine);
+function showQuestion(){board.classList.remove('winner-phase');state.phase='question';updateSettingsGear();state.question=nextQuestion();winnerView.classList.add('hidden');$$('.player-zone').forEach(z=>z.classList.add('phase-hidden'));winnerMini.textContent=state.names[state.winner];questionText.textContent=state.question.text;questionBox.style.background=state.question.color;questionBox.style.color=state.question.dark?'#111':'#fff';questionBox.classList.toggle('is-light-question',!!state.question.dark);questionView.classList.remove('hidden');fitQuestionToOneLine();requestAnimationFrame(fitQuestionToOneLine);
   let left=state.questionSeconds;
   timerText.textContent=state.showTimer?format(left):'';
   timerText.classList.toggle('hidden',!state.showTimer);
