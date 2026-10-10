@@ -99,3 +99,9 @@ v28 PWA:
 - Oude CSS-regel die het tandwiel in het spel verborg overschreven.
 - Tandwiel is nu zichtbaar tijdens de vraagfase en verborgen in andere fases.
 - Start spel wordt in zowel Dark als Light mode geforceerd groen weergegeven.
+
+
+v29 PWA:
+- Bij 3 spelers is speler 3 geel.
+- Bij 4 spelers is speler 4 geel in plaats van paars.
+- Versie bijgewerkt naar v29 PWA.

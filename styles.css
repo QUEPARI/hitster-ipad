@@ -638,3 +638,15 @@ html[data-theme="light"] #startGame.start-game-green,
   border:1px solid #2e9d57 !important;
   box-shadow:none !important;
 }
+
+
+/* v29 - spelerkleuren */
+.board.players-3 .p3{
+  background:#fdd835 !important;
+  color:#111111 !important;
+}
+
+.board.players-4 .p4{
+  background:#fdd835 !important;
+  color:#111111 !important;
+}
