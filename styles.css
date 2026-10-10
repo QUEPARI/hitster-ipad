@@ -1562,3 +1562,6 @@ html[data-theme="hitster"] #questionText,
 html[data-theme="hitster"] .question-box.is-light-question #questionText{
   text-shadow:0 2px 10px rgba(0,0,0,.28) !important;
 }
+
+/* v47: Chrome Android foutmelding bij startprobleem */
+.start-error{color:#ffb2c1;font-size:13px;text-align:center;margin:10px 0 0;overflow-wrap:anywhere;}

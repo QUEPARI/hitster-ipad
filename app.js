@@ -1,4 +1,4 @@
-const APP_VERSION = 'v46 PWA';
+const APP_VERSION = 'v47 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -16,7 +16,7 @@ const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusT
 function hideTimeoutSequence(){
   if(!timeoutSequence) return;
   timeoutSequence.classList.add('hidden');
-  timeUpText?.classList.add('hidden');
+  if(timeUpText) timeUpText.classList.add('hidden');
 }
 
 function showTimeoutSequence(){
@@ -78,7 +78,7 @@ function pauseQuestionForSettings(){
 function resumeQuestionAfterSettings(){
   if(!settingsPausedQuestion || state.phase !== 'question') return;
   settingsPausedQuestion = false;
-  let left = Math.max(0, pausedQuestionRemaining ?? state.questionSeconds);
+  let left = Math.max(0, (pausedQuestionRemaining === null ? state.questionSeconds : pausedQuestionRemaining));
   pausedQuestionRemaining = null;
 
   timerText.textContent = state.showTimer ? format(left) : '';
@@ -189,13 +189,45 @@ $('#resetBtn').onclick=()=>{
   pausedQuestionRemaining=null;
   resetToSetup();
 };
-$('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');updateSettingsGear();board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
+// v47: expliciete startafhandeling en foutmelding voor mobiele browsers.
+function startGameSafely(){
+  try {
+    const inputs=$$('#nameFields input');
+    for(let i=0;i<state.count;i++){
+      const field=inputs[i];
+      const value=field ? field.value.trim() : '';
+      state.names[i]=value||('Speler '+(i+1));
+    }
+    syncSettings();
+    board.className='board players-'+state.count;
+    $$('.player-zone').forEach(z=>z.classList.remove('winner','disabled','phase-hidden'));
+    setup.classList.add('hidden');
+    game.classList.remove('hidden');
+    state.phase='idle';
+    updateSettingsGear();
+    startRound();
+  } catch(err){
+    setup.classList.remove('hidden');
+    game.classList.add('hidden');
+    const errorEl=document.getElementById('startError');
+    if(errorEl){
+      errorEl.textContent='Starten mislukt: '+(err && err.message ? err.message : 'Onbekende fout');
+      errorEl.classList.remove('hidden');
+    }
+    if(window.console && console.error) console.error('Hitster start error',err);
+  }
+}
+const startGameButton=$('#startGame');
+if(startGameButton){
+  startGameButton.addEventListener('click',startGameSafely);
+}
+
 function showIdle(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
 function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
 function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
-function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=state.question?.id;let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
+function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=(state.question ? state.question.id : null);let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
 function nextQuestion(){if(!state.bag.length)refillBag();return state.bag.shift()}
 
 function fitQuestionToOneLine(){

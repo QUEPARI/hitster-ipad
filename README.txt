@@ -200,3 +200,6 @@ v44 PWA:
 
 
 v46 PWA (gebaseerd op v44): TIJD IS OM!; origineel logo uit v43 teruggezet.
+
+
+v47 PWA: Android compatibiliteit: geen optional chaining/nullish coalescing, defensieve Start spel-handler, foutmelding bij mislukte start.
