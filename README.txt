@@ -117,3 +117,10 @@ v30 PWA:
 v31 PWA:
 - Timer tonen gebruikt nu dezelfde checkbox-opmaak als de opdrachten:
   eerst checkbox, daarna tekst.
+
+
+v32 PWA:
+- Vanaf 10 seconden begint de vraagbox te pulseren.
+- Richting 0 wordt het effect steeds sneller en sterker.
+- De originele vraagkleur blijft de basis.
+- Effect stopt direct bij een nieuwe fase/ronde.

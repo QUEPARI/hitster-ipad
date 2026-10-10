@@ -1,4 +1,4 @@
-const APP_VERSION = 'v31 PWA';
+const APP_VERSION = 'v32 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -73,6 +73,7 @@ function resumeQuestionAfterSettings(){
 
   timerText.textContent = state.showTimer ? format(left) : '';
   timerText.classList.toggle('hidden', !state.showTimer);
+  updateQuestionTension(left);
 
   if(left <= 0){
     startRound();
@@ -179,11 +180,11 @@ $('#resetBtn').onclick=()=>{
   resetToSetup();
 };
 $('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');updateSettingsGear();board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
-function showIdle(){clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
-function startRound(){clearTimers();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
+function showIdle(){clearQuestionTension();clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
+function startRound(){clearQuestionTension();clearTimers();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
-function chooseWinner(i){state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
+function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
 function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=state.question?.id;let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
 function nextQuestion(){if(!state.bag.length)refillBag();return state.bag.shift()}
 
@@ -206,16 +207,71 @@ function fitQuestionToOneLine(){
   }
 }
 
+
+function hexToRgb(hex){
+  const value=hex.replace('#','');
+  const n=parseInt(value.length===3 ? value.split('').map(c=>c+c).join('') : value,16);
+  return {r:(n>>16)&255,g:(n>>8)&255,b:n&255};
+}
+
+function mixChannel(a,b,t){
+  return Math.round(a+(b-a)*t);
+}
+
+function mixHex(hex,target,t){
+  const c=hexToRgb(hex);
+  const targetRgb=target==='white'?{r:255,g:255,b:255}:{r:0,g:0,b:0};
+  return `rgb(${mixChannel(c.r,targetRgb.r,t)}, ${mixChannel(c.g,targetRgb.g,t)}, ${mixChannel(c.b,targetRgb.b,t)})`;
+}
+
+function updateQuestionTension(remaining){
+  if(!questionBox || !state.question){
+    return;
+  }
+
+  if(remaining>10 || remaining<=0){
+    questionBox.classList.remove('tension-active');
+    questionBox.style.removeProperty('--pulse-light');
+    questionBox.style.removeProperty('--pulse-dark');
+    questionBox.style.removeProperty('--pulse-duration');
+    questionBox.style.background=state.question.color;
+    return;
+  }
+
+  const progress=(10-remaining)/9; // 0 bij 10 sec, 1 bij 1 sec
+  const eased=progress*progress;
+
+  const lightMix=0.08 + eased*0.26;
+  const darkMix=0.07 + eased*0.28;
+  const duration=1.25 - eased*0.80; // 1.25s -> 0.45s
+
+  questionBox.style.setProperty('--pulse-light', mixHex(state.question.color,'white',lightMix));
+  questionBox.style.setProperty('--pulse-dark', mixHex(state.question.color,'black',darkMix));
+  questionBox.style.setProperty('--pulse-duration', `${duration.toFixed(2)}s`);
+  questionBox.classList.add('tension-active');
+}
+
+function clearQuestionTension(){
+  if(!questionBox) return;
+  questionBox.classList.remove('tension-active');
+  questionBox.style.removeProperty('--pulse-light');
+  questionBox.style.removeProperty('--pulse-dark');
+  questionBox.style.removeProperty('--pulse-duration');
+  if(state.question) questionBox.style.background=state.question.color;
+}
+
 function showQuestion(){state.phase='question';updateSettingsGear();state.question=nextQuestion();winnerView.classList.add('hidden');$$('.player-zone').forEach(z=>z.classList.add('phase-hidden'));winnerMini.textContent=state.names[state.winner];questionText.textContent=state.question.text;questionBox.style.background=state.question.color;questionBox.style.color=state.question.dark?'#111':'#fff';questionView.classList.remove('hidden');fitQuestionToOneLine();requestAnimationFrame(fitQuestionToOneLine);
   let left=state.questionSeconds;
   timerText.textContent=state.showTimer?format(left):'';
   timerText.classList.toggle('hidden',!state.showTimer);
+  updateQuestionTension(left);
   if(state.timer)clearTimeout(state.timer);
   questionDeadline=Date.now()+left*1000;
   const tick=()=>{
     if(state.phase!=='question' || settingsPausedQuestion)return;
     const remaining=Math.max(0,Math.ceil((questionDeadline-Date.now())/1000));
     if(state.showTimer)timerText.textContent=format(remaining);
+    updateQuestionTension(remaining);
     if(remaining<=0){
       questionDeadline=null;
       startRound();
@@ -228,7 +284,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
 function format(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
-function resetToSetup(){clearTimers();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
+function resetToSetup(){clearQuestionTension();clearTimers();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
 
 window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToOneLine()});
 
