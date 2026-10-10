@@ -1,4 +1,4 @@
-const APP_VERSION = 'v30 PWA';
+const APP_VERSION = 'v31 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},

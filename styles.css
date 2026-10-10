@@ -684,3 +684,9 @@ html[data-theme="light"] #lightModeBtn.theme-choice.active{
   border-color:#161a20 !important;
   box-shadow:0 0 0 3px rgba(22,26,32,.12) !important;
 }
+
+
+/* v31 - Timer tonen zoals opdrachten */
+.timer-check{
+  margin-bottom:18px;
+}

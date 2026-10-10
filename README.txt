@@ -112,3 +112,8 @@ v30 PWA:
 - Opslaan en Reset spel hebben dezelfde lettergrootte.
 - Versieregel 3px kleiner.
 - Actieve Dark/Light keuze duidelijker zichtbaar.
+
+
+v31 PWA:
+- Timer tonen gebruikt nu dezelfde checkbox-opmaak als de opdrachten:
+  eerst checkbox, daarna tekst.
