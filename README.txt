@@ -197,3 +197,6 @@ v44 PWA:
 - De grote Instellingen-knop op het startscherm is vervangen door een tandwiel rechts van Start spel.
 - Het bestaande tandwiel tijdens de vraag blijft staan.
 - Service-worker cache naar v43; offline shell is precached.
+
+
+v46 PWA (gebaseerd op v44): TIJD IS OM!; origineel logo uit v43 teruggezet.

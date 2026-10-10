@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=44" />
+  <link rel="manifest" href="./manifest.webmanifest?v=46" />
   <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=44" />
+  <link rel="stylesheet" href="./styles.css?v=46" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1 class="setup-brand" aria-label="Hitster Buzzer">
-          <img class="hitster-logo" src="./hitster-logo.png" alt="Hitster" />
+          <img class="hitster-logo" src="./hitster-logo.png?v=46" alt="Hitster" />
           <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
         </h1>
         <div class="player-count-label">Aantal spelers</div>
@@ -36,7 +36,7 @@
           </button>
         </div>
       </div>
-      <div class="setup-version">V44 PWA</div>
+      <div class="setup-version">V46 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -64,7 +64,7 @@
       </div>
 
       <div id="timeoutSequence" class="timeout-sequence hidden" aria-hidden="true">
-        <div id="timeUpText" class="time-up-text hidden">TIJD IS OP!</div>
+        <div id="timeUpText" class="time-up-text hidden">TIJD IS OM!</div>
       </div>
 
       <button id="settingsGear" class="settings-gear hidden" aria-label="Instellingen" title="Instellingen">
@@ -89,14 +89,14 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v44 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v46 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=44"></script>
+  <script src="./app.js?v=46"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=44'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=46'));
     }
   </script>
 </body>
