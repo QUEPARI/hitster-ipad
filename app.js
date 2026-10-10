@@ -1,4 +1,4 @@
-const APP_VERSION = 'v35 PWA';
+const APP_VERSION = 'v36 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -10,18 +10,13 @@ const QUESTIONS=[
 ];
 const state={count:4,names:['Speler 1','Speler 2','Speler 3','Speler 4'],phase:'setup',winner:null,question:null,bag:[],timer:null,auto:true,winnerSeconds:2,questionSeconds:30,showTimer:true,active:new Set(QUESTIONS.map(q=>q.id))};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusText'),winnerView=$('#winnerView'),questionView=$('#questionView'),winnerMini=$('#winnerMini'),questionBox=$('#questionBox'),questionText=$('#questionText'),timerText=$('#timerText'),nextRound=$('#nextRound'),manualStart=$('#manualStart'),timeoutSequence=$('#timeoutSequence'),timeUpText=$('#timeUpText'),discoStage=$('#discoStage'),discoBall=$('#discoBall'),discoExplosion=$('#discoExplosion');
+const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusText'),winnerView=$('#winnerView'),questionView=$('#questionView'),winnerMini=$('#winnerMini'),questionBox=$('#questionBox'),questionText=$('#questionText'),timerText=$('#timerText'),nextRound=$('#nextRound'),manualStart=$('#manualStart'),timeoutSequence=$('#timeoutSequence'),timeUpText=$('#timeUpText');
 
 
 function hideTimeoutSequence(){
   if(!timeoutSequence) return;
   timeoutSequence.classList.add('hidden');
   timeUpText?.classList.add('hidden');
-  discoStage?.classList.add('hidden');
-  discoStage?.classList.remove('drop-in');
-  discoBall?.classList.remove('explode');
-  discoExplosion?.classList.add('hidden');
-  discoExplosion?.classList.remove('explode');
 }
 
 function showTimeoutSequence(){
@@ -40,21 +35,9 @@ function showTimeoutSequence(){
   timeUpText.classList.remove('hidden');
 
   state.timer=setTimeout(()=>{
-    timeUpText.classList.add('hidden');
-    discoStage.classList.remove('hidden');
-    discoStage.classList.add('drop-in');
-
-    state.timer=setTimeout(()=>{
-      discoBall.classList.add('explode');
-      discoExplosion.classList.remove('hidden');
-      discoExplosion.classList.add('explode');
-
-      state.timer=setTimeout(()=>{
-        hideTimeoutSequence();
-        startRound();
-      }, 900);
-    }, 1300);
-  }, 1500);
+    hideTimeoutSequence();
+    startRound();
+  },1500);
 }
 
 function setTheme(theme){

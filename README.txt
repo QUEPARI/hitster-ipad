@@ -144,3 +144,9 @@ v35 PWA:
 - Meer cartoonachtige details, highlights en extra binnenring-rotatie.
 - Explosie groter, feller en voller gemaakt.
 - Versie bijgewerkt naar v35 PWA.
+
+
+v36 PWA:
+- Discobal en explosie verwijderd.
+- 'TIJD IS OP!' blijft 1,5 seconde zichtbaar.
+- Daarna direct terug naar de buzzerknoppen.
