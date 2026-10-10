@@ -650,3 +650,37 @@ html[data-theme="light"] #startGame.start-game-green,
   background:#fdd835 !important;
   color:#111111 !important;
 }
+
+
+/* v30 - instellingen verfijning */
+#saveSettings,
+#resetBtn{
+  font-size:18px !important;
+}
+
+/* Versieregel 3px kleiner dan voorheen */
+.app-version{
+  font-size:11px !important;
+}
+
+/* Duidelijker geselecteerde Dark / Light modus */
+html[data-theme="dark"] #darkModeBtn.theme-choice.active,
+html[data-theme="light"] #lightModeBtn.theme-choice.active{
+  background:#ffffff !important;
+  color:#111111 !important;
+  border:2px solid #ffffff !important;
+  box-shadow:0 0 0 3px rgba(255,255,255,.18) !important;
+}
+
+html[data-theme="dark"] #lightModeBtn.theme-choice:not(.active),
+html[data-theme="light"] #darkModeBtn.theme-choice:not(.active){
+  opacity:.55;
+  border:1px solid transparent !important;
+}
+
+html[data-theme="light"] #lightModeBtn.theme-choice.active{
+  background:#161a20 !important;
+  color:#ffffff !important;
+  border-color:#161a20 !important;
+  box-shadow:0 0 0 3px rgba(22,26,32,.12) !important;
+}

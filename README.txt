@@ -105,3 +105,10 @@ v29 PWA:
 - Bij 3 spelers is speler 3 geel.
 - Bij 4 spelers is speler 4 geel in plaats van paars.
 - Versie bijgewerkt naar v29 PWA.
+
+
+v30 PWA:
+- Label aangepast naar Checkbox Timer tonen.
+- Opslaan en Reset spel hebben dezelfde lettergrootte.
+- Versieregel 3px kleiner.
+- Actieve Dark/Light keuze duidelijker zichtbaar.

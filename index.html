@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#0d0f14" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=29" />
+  <link rel="manifest" href="./manifest.webmanifest?v=30" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=29" />
+  <link rel="stylesheet" href="./styles.css?v=30" />
 </head>
 <body>
   <main id="app">
@@ -27,7 +27,7 @@
         <button id="setupSettingsBtn" class="secondary big setup-settings-btn">Instellingen</button>
         <button id="startGame" class="primary big start-game-green">Start spel</button>
       </div>
-      <div class="setup-version">V29 PWA</div>
+      <div class="setup-version">V30 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -78,19 +78,19 @@
 
       <h3>Parameters</h3>
       <label class="field">Opdrachttimer (seconden)<input id="questionSeconds" type="number" min="5" max="300" value="30"></label>
-      <label class="switch-row"><span>Timer tonen</span><input id="showTimer" type="checkbox" checked><i></i></label>
+      <label class="switch-row"><span>Checkbox Timer tonen</span><input id="showTimer" type="checkbox" checked><i></i></label>
 
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v29 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v30 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=29"></script>
+  <script src="./app.js?v=30"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=29'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=30'));
     }
   </script>
 </body>
