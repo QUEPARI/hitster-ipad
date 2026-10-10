@@ -1367,3 +1367,134 @@ html[data-theme="hitster"] .next-round{
   box-shadow:0 0 15px rgba(0,158,227,.18) !important;
 }
 html[data-theme="hitster"] input[type="checkbox"]{accent-color:var(--hitster-pink);}
+
+
+/* v42 — Hitster is standaard en enige weergave. */
+:root,html[data-theme="hitster"]{
+  --bg:#00161D;
+  --surface:#061D26;
+  --surface-2:#09232F;
+  --surface-3:#10313D;
+  --input-bg:#061A23;
+  --border:#1C485B;
+  --text:#F4FBFF;
+  --muted:#96B6C4;
+  --primary-bg:#E5007D;
+  --primary-text:#FFFFFF;
+  --status-bg:#061D26;
+}
+html[data-theme="hitster"],
+html[data-theme="hitster"] body,
+html[data-theme="hitster"] #app,
+html[data-theme="hitster"] .screen,
+html[data-theme="hitster"] .game-screen,
+html[data-theme="hitster"] .board{
+  background:#00161D !important;
+  color:#F4FBFF !important;
+}
+/* De vaste speelveldachtergrond blijft identiek bij buzzer en vraag. */
+html[data-theme="hitster"] #board,
+html[data-theme="hitster"] #game{
+  background:#00161D !important;
+}
+html[data-theme="hitster"] .setup-screen{
+  background:radial-gradient(ellipse at 50% 37%,rgba(229,0,125,.085) 0%,transparent 59%),#00161D !important;
+}
+html[data-theme="hitster"] .setup-card,
+html[data-theme="hitster"] .modal-card{
+  background:linear-gradient(155deg,#08232D 0%,#03141C 100%) !important;
+  border:1px solid #205064 !important;
+  box-shadow:0 20px 55px rgba(0,0,0,.48),0 0 21px rgba(0,158,227,.07) !important;
+}
+/* Werkelijk Hitster-logo uit de verstrekte afbeelding, plus BUZZER in neon. */
+.setup-brand{
+  width:100%;
+  margin:0 0 clamp(8px,1.8vh,18px);
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  text-align:center;
+}
+.setup-brand .hitster-logo{
+  display:block;
+  width:min(100%,clamp(160px,26vh,248px));
+  height:auto;
+  object-fit:contain;
+  flex:none;
+  filter:drop-shadow(0 0 9px rgba(229,0,125,.19));
+}
+.setup-brand .buzzer-neon{
+  display:block;
+  margin-top:-3px;
+  margin-bottom:6px;
+  padding:0 .18em;
+  font-family:"Helvetica Neue", "Segoe UI Light", "Arial Narrow", Arial, sans-serif;
+  font-size:clamp(28px,4.2vh,42px);
+  font-weight:200;
+  letter-spacing:.16em;
+  line-height:1.12;
+  color:#FFB7E0;
+  -webkit-text-stroke:.65px #FFE6F4;
+  text-shadow:0 0 2px #FFF,0 0 6px #E5007D,0 0 13px #E5007D,0 0 24px rgba(229,0,125,.8);
+}
+/* Setup-card blijft bruikbaar op korte iPad-schermen. */
+html[data-theme="hitster"] .setup-card{padding:clamp(16px,2vw,24px) !important;}
+html[data-theme="hitster"] .setup-screen{overflow-y:auto;overscroll-behavior:contain;}
+html[data-theme="hitster"] .name-fields{margin:12px 0 14px;gap:8px;}
+html[data-theme="hitster"] .name-fields input{padding:11px 14px;}
+html[data-theme="hitster"] .player-count-label{margin-bottom:8px;}
+/* Ook geselecteerd spelersaantal krijgt een verloop zoals de andere knoppen. */
+html[data-theme="hitster"] #playerCount button.active{
+  background:linear-gradient(180deg,#FF55B1 0%,#F31C95 45%,#E5007D 100%) !important;
+  border:1px solid #FF78C0 !important;
+  color:#FFFFFF !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 0 14px rgba(229,0,125,.30) !important;
+  text-shadow:0 1px 3px rgba(76,0,33,.4);
+}
+/* Tekstglow in de vraag is vergelijkbaar met de bestaande timer. */
+html[data-theme="hitster"] #questionText{
+  text-shadow:0 0 5px rgba(255,255,255,.52),0 0 15px rgba(255,255,255,.28),0 2px 11px rgba(0,0,0,.22) !important;
+}
+html[data-theme="hitster"] .question-box.is-light-question #questionText{
+  text-shadow:0 0 5px rgba(0,0,0,.30),0 0 14px rgba(0,0,0,.19) !important;
+}
+/* Spelerkleuren uit v41 blijven exact behouden, ook in de drie layouts. */
+#board .player-zone.p1{background:#E5007D !important;}
+#board .player-zone.p2{background:#009EE3 !important;}
+#board .player-zone.p3{background:#FFED00 !important;color:#111 !important;}
+#board .player-zone.p4{background:#E94C15 !important;color:#fff !important;}
+
+
+/* Compacte liggende schermen: logo en versieregel blijven apart zichtbaar. */
+@media (max-height:720px){
+  html[data-theme="hitster"] .setup-screen{
+    display:flex !important;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:12px 18px !important;
+  }
+  html[data-theme="hitster"] .setup-card{
+    flex:0 0 auto;
+    padding:14px 20px !important;
+  }
+  html[data-theme="hitster"] .setup-brand{
+    margin-bottom:6px;
+  }
+  html[data-theme="hitster"] .setup-brand .hitster-logo{
+    width:min(100%,142px);
+  }
+  html[data-theme="hitster"] .setup-brand .buzzer-neon{
+    font-size:27px;
+    margin-bottom:2px;
+  }
+  html[data-theme="hitster"] .setup-version{
+    position:static;
+    transform:none;
+    margin:8px 0 0;
+    flex:0 0 auto;
+  }
+}

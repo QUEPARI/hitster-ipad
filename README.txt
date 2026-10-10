@@ -185,3 +185,6 @@ v41 PWA:
 - Bij 2 spelers: roze/blauw. Bij 3 spelers: roze/blauw/geel.
 - Bij 4 spelers: roze/blauw/geel/oranje.
 - Oude speler-3/speler-4 kleuren expliciet overschreven, inclusief de iPad-weergave.
+
+
+v42: vaste Hitster-modus zonder weergavekeuze; logo van ingestuurde afbeelding en neon BUZZER; roze verloop spelerskeuze; opdrachttekst met glow; speelveldachtergrond #00161D; bestaande spelerkleuren behouden.

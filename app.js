@@ -1,4 +1,4 @@
-const APP_VERSION = 'v41 PWA';
+const APP_VERSION = 'v42 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -40,25 +40,9 @@ function showTimeoutSequence(){
   },1500);
 }
 
-function setTheme(theme){
-  const next = ['dark','light','hitster'].includes(theme) ? theme : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  document.body.classList.toggle('light-mode', next === 'light');
-  document.body.classList.toggle('hitster-mode', next === 'hitster');
-  localStorage.setItem('hitster-ipad-theme', next);
-
-  const darkBtn = document.getElementById('darkModeBtn');
-  const lightBtn = document.getElementById('lightModeBtn');
-  const hitsterBtn = document.getElementById('hitsterModeBtn');
-  if (darkBtn) darkBtn.classList.toggle('active', next === 'dark');
-  if (lightBtn) lightBtn.classList.toggle('active', next === 'light');
-  if (hitsterBtn) hitsterBtn.classList.toggle('active', next === 'hitster');
-}
-{
-  const saved = localStorage.getItem('hitster-ipad-theme');
-  setTheme(['dark','light','hitster'].includes(saved) ? saved : 'dark');
-}
-
+// Hitster is nu de enige weergave: oude opgeslagen thema's negeren.
+document.documentElement.setAttribute('data-theme','hitster');
+document.body.classList.add('hitster-mode');
 
 function forceCloseAllModals(){
   const settingsModal = document.getElementById('settingsModal');
@@ -66,14 +50,6 @@ function forceCloseAllModals(){
 }
 forceCloseAllModals();
 window.addEventListener('pageshow', forceCloseAllModals);
-
-const darkModeBtn = document.getElementById('darkModeBtn');
-const lightModeBtn = document.getElementById('lightModeBtn');
-const hitsterModeBtn = document.getElementById('hitsterModeBtn');
-if (darkModeBtn) darkModeBtn.addEventListener('click', () => setTheme('dark'));
-if (lightModeBtn) lightModeBtn.addEventListener('click', () => setTheme('light'));
-if (hitsterModeBtn) hitsterModeBtn.addEventListener('click', () => setTheme('hitster'));
-
 
 let pausedQuestionRemaining = null;
 let questionDeadline = null;
@@ -340,7 +316,7 @@ function clearQuestionTension(){
   if(state.question) questionBox.style.background=state.question.color;
 }
 
-function showQuestion(){state.phase='question';updateSettingsGear();state.question=nextQuestion();winnerView.classList.add('hidden');$$('.player-zone').forEach(z=>z.classList.add('phase-hidden'));winnerMini.textContent=state.names[state.winner];questionText.textContent=state.question.text;questionBox.style.background=state.question.color;questionBox.style.color=state.question.dark?'#111':'#fff';questionView.classList.remove('hidden');fitQuestionToOneLine();requestAnimationFrame(fitQuestionToOneLine);
+function showQuestion(){state.phase='question';updateSettingsGear();state.question=nextQuestion();winnerView.classList.add('hidden');$$('.player-zone').forEach(z=>z.classList.add('phase-hidden'));winnerMini.textContent=state.names[state.winner];questionText.textContent=state.question.text;questionBox.style.background=state.question.color;questionBox.style.color=state.question.dark?'#111':'#fff';questionBox.classList.toggle('is-light-question',!!state.question.dark);questionView.classList.remove('hidden');fitQuestionToOneLine();requestAnimationFrame(fitQuestionToOneLine);
   let left=state.questionSeconds;
   timerText.textContent=state.showTimer?format(left):'';
   timerText.classList.toggle('hidden',!state.showTimer);

@@ -1,22 +1,25 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="hitster">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Hitster iPad</title>
-  <meta name="theme-color" content="#0d0f14" />
+  <title>Hitster Buzzer</title>
+  <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=41" />
+  <link rel="manifest" href="./manifest.webmanifest?v=42" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=41" />
+  <link rel="stylesheet" href="./styles.css?v=42" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
-        <h1 class="setup-title">Hitster Buzzer</h1>
+        <h1 class="setup-brand" aria-label="Hitster Buzzer">
+          <img class="hitster-logo" src="./assets/hitster-logo.png" alt="Hitster" />
+          <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
+        </h1>
         <div class="player-count-label">Aantal spelers</div>
         <div class="segmented" id="playerCount">
           <button data-count="2">2</button>
@@ -27,7 +30,7 @@
         <button id="setupSettingsBtn" class="secondary big setup-settings-btn">Instellingen</button>
         <button id="startGame" class="primary big start-game-green">Start spel</button>
       </div>
-      <div class="setup-version">V41 PWA</div>
+      <div class="setup-version">V42 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -69,14 +72,6 @@
   <div id="settingsModal" class="modal hidden">
     <div class="modal-card">
       <div class="modal-head"><h2>Instellingen</h2><button class="close" data-close="settingsModal">×</button></div>
-      <div class="theme-setting">
-        <span>Weergave</span>
-        <div class="theme-toggle" role="group" aria-label="Weergave">
-          <button type="button" id="darkModeBtn" class="theme-choice active">Dark</button>
-          <button type="button" id="lightModeBtn" class="theme-choice">Light</button>
-          <button type="button" id="hitsterModeBtn" class="theme-choice hitster-choice">Hitster</button>
-        </div>
-      </div>
 
       <h3>Opdrachten</h3>
       <div id="questionOptions" class="question-options"></div>
@@ -88,14 +83,14 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v41 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v42 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=41"></script>
+  <script src="./app.js?v=42"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=41'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=42'));
     }
   </script>
 </body>
