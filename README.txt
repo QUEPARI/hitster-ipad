@@ -172,3 +172,9 @@ v39 PWA:
 - Actieve opties, koppen, tandwiel, Volgende ronde, checkboxes en focusaccent roze.
 - Geel alleen subtiel secundair accent.
 - Functionele kleuren van spelers, opdrachten en groene Start/Opslaan-knop behouden.
+
+
+v40 PWA:
+- Hitster mode opnieuw verfijnd met meer neon roze/blauw uitstraling op basis van logo/verpakking.
+- Donkerblauwe/zwarte basis behouden.
+- Buzzerknoppen gewijzigd naar paars, blauw, geel en oranje.

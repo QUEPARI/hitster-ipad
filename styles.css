@@ -3,7 +3,7 @@
 html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#0d0f14}
 body{touch-action:manipulation;overscroll-behavior:none}
 button,input{font:inherit}
-.hidden{display:none!important}.screen{width:100%;height:100dvh}.setup-screen{display:grid;place-items:center;padding:24px}.setup-card{width:min(620px,100%);background:#171a22;border:1px solid #2a2f3b;border-radius:24px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.35)}h1{font-size:clamp(34px,5vw,60px);margin:0}.muted{color:#aab1bf;margin:4px 0 22px}.segmented{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.segmented button,.ghost,.danger,.secondary,.primary{border:0;border-radius:14px;padding:14px 18px;font-weight:800}.segmented button{background:#272c37;color:#fff}.segmented button.active{background:#fff;color:#111}.name-fields{display:grid;gap:10px;margin:18px 0}.name-fields input,.field input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #363d4c;background:#0f1218;color:#fff;font-size:18px}.primary{background:#fff;color:#111}.secondary{background:#2a303b;color:#fff}.danger{background:#d83c3c;color:#fff}.ghost{background:#20252f;color:#fff}.big{width:100%;font-size:22px}.game-screen{position:relative;display:grid;grid-template-rows:auto 1fr;min-height:0}.topbar{position:relative;z-index:30;display:flex;justify-content:flex-end;gap:8px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));background:#0d0f14}.board{height:auto;min-height:0;width:100vw;display:grid;gap:var(--gap);padding:0 max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));position:relative}.board.players-4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.board.players-2{grid-template-columns:1fr 1fr;grid-template-rows:1fr}.board.players-3{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.player-zone{border:0;border-radius:28px;color:white;position:relative;overflow:hidden;min-width:0;min-height:0;touch-action:none;transition:opacity .15s ease,transform .15s ease}.p1{background:#d84343}.p2{background:#2f80ed}.p3{background:#2e9d57}.p4{background:#7b4fc9}.player-zone.phase-hidden{visibility:hidden;pointer-events:none}.player-zone.disabled{opacity:.4}.player-zone.winner{outline:8px solid #fff;outline-offset:-8px}.settings-reset{margin-top:12px}.players-3 .p3{grid-column:1/3}.players-2 .p3,.players-2 .p4,.players-3 .p4{display:none}.center-panel{position:absolute;z-index:20;left:50%;top:50%;transform:translate(-50%,-50%);width:min(48vw,620px);pointer-events:none;text-align:center}.status-text{display:inline-block;padding:12px 18px;border-radius:999px;background:rgba(13,15,20,.9);font-weight:900;font-size:clamp(18px,2.4vw,30px)}.winner-view{font-size:clamp(46px,8vw,110px);font-weight:1000;text-shadow:0 4px 30px #000}.question-wrap{pointer-events:auto}.winner-mini{font-size:clamp(24px,3vw,42px);font-weight:1000;margin-bottom:10px;text-shadow:0 2px 18px #000}.question-box{border-radius:24px;padding:26px 24px;box-shadow:0 15px 50px rgba(0,0,0,.32)}.question-text{font-size:clamp(28px,4vw,58px);font-weight:1000;line-height:1.05}.timer-text{font-size:clamp(36px,5vw,72px);font-variant-numeric:tabular-nums;font-weight:900;margin-top:12px}.next-round,.center-start{width:100%;margin-top:10px;font-size:clamp(18px,2vw,26px);pointer-events:auto}.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px}.modal-card{width:min(650px,96vw);max-height:88dvh;overflow:auto;background:#171a22;border:1px solid #303644;border-radius:22px;padding:22px}.modal-card.compact{width:min(520px,96vw)}.modal-head{display:flex;align-items:center;justify-content:space-between}.modal-head h2{margin:0 0 18px}.close{border:0;background:transparent;color:white;font-size:36px}.question-options{display:grid;gap:8px;margin-bottom:20px}.question-check{display:flex;gap:12px;align-items:center;padding:12px 14px;background:#20252f;border-radius:12px}.question-check input{width:22px;height:22px}.full{width:100%}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#20252f;padding:14px;border-radius:12px;margin-bottom:18px}.switch-row input{width:26px;height:26px}.field{display:grid;gap:8px;margin:14px 0;font-weight:800}@media (max-width:800px){.center-panel{width:min(60vw,520px)}.ghost,.danger{padding:10px 12px}.board{--gap:8px;padding:0 8px max(8px,env(safe-area-inset-bottom))}.player-zone{border-radius:20px}}
+.hidden{display:none!important}.screen{width:100%;height:100dvh}.setup-screen{display:grid;place-items:center;padding:24px}.setup-card{width:min(620px,100%);background:#171a22;border:1px solid #2a2f3b;border-radius:24px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.35)}h1{font-size:clamp(34px,5vw,60px);margin:0}.muted{color:#aab1bf;margin:4px 0 22px}.segmented{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.segmented button,.ghost,.danger,.secondary,.primary{border:0;border-radius:14px;padding:14px 18px;font-weight:800}.segmented button{background:#272c37;color:#fff}.segmented button.active{background:#fff;color:#111}.name-fields{display:grid;gap:10px;margin:18px 0}.name-fields input,.field input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #363d4c;background:#0f1218;color:#fff;font-size:18px}.primary{background:#fff;color:#111}.secondary{background:#2a303b;color:#fff}.danger{background:#d83c3c;color:#fff}.ghost{background:#20252f;color:#fff}.big{width:100%;font-size:22px}.game-screen{position:relative;display:grid;grid-template-rows:auto 1fr;min-height:0}.topbar{position:relative;z-index:30;display:flex;justify-content:flex-end;gap:8px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));background:#0d0f14}.board{height:auto;min-height:0;width:100vw;display:grid;gap:var(--gap);padding:0 max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));position:relative}.board.players-4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.board.players-2{grid-template-columns:1fr 1fr;grid-template-rows:1fr}.board.players-3{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.player-zone{border:0;border-radius:28px;color:white;position:relative;overflow:hidden;min-width:0;min-height:0;touch-action:none;transition:opacity .15s ease,transform .15s ease}.p1{background:#b43dff}.p2{background:#17a8ff}.p3{background:#ffe100}.p4{background:#ff7a1a}.player-zone.phase-hidden{visibility:hidden;pointer-events:none}.player-zone.disabled{opacity:.4}.player-zone.winner{outline:8px solid #fff;outline-offset:-8px}.settings-reset{margin-top:12px}.players-3 .p3{grid-column:1/3}.players-2 .p3,.players-2 .p4,.players-3 .p4{display:none}.center-panel{position:absolute;z-index:20;left:50%;top:50%;transform:translate(-50%,-50%);width:min(48vw,620px);pointer-events:none;text-align:center}.status-text{display:inline-block;padding:12px 18px;border-radius:999px;background:rgba(13,15,20,.9);font-weight:900;font-size:clamp(18px,2.4vw,30px)}.winner-view{font-size:clamp(46px,8vw,110px);font-weight:1000;text-shadow:0 4px 30px #000}.question-wrap{pointer-events:auto}.winner-mini{font-size:clamp(24px,3vw,42px);font-weight:1000;margin-bottom:10px;text-shadow:0 2px 18px #000}.question-box{border-radius:24px;padding:26px 24px;box-shadow:0 15px 50px rgba(0,0,0,.32)}.question-text{font-size:clamp(28px,4vw,58px);font-weight:1000;line-height:1.05}.timer-text{font-size:clamp(36px,5vw,72px);font-variant-numeric:tabular-nums;font-weight:900;margin-top:12px}.next-round,.center-start{width:100%;margin-top:10px;font-size:clamp(18px,2vw,26px);pointer-events:auto}.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px}.modal-card{width:min(650px,96vw);max-height:88dvh;overflow:auto;background:#171a22;border:1px solid #303644;border-radius:22px;padding:22px}.modal-card.compact{width:min(520px,96vw)}.modal-head{display:flex;align-items:center;justify-content:space-between}.modal-head h2{margin:0 0 18px}.close{border:0;background:transparent;color:white;font-size:36px}.question-options{display:grid;gap:8px;margin-bottom:20px}.question-check{display:flex;gap:12px;align-items:center;padding:12px 14px;background:#20252f;border-radius:12px}.question-check input{width:22px;height:22px}.full{width:100%}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#20252f;padding:14px;border-radius:12px;margin-bottom:18px}.switch-row input{width:26px;height:26px}.field{display:grid;gap:8px;margin:14px 0;font-weight:800}@media (max-width:800px){.center-panel{width:min(60vw,520px)}.ghost,.danger{padding:10px 12px}.board{--gap:8px;padding:0 8px max(8px,env(safe-area-inset-bottom))}.player-zone{border-radius:20px}}
 
 
 .player-zone.p1 .player-zone.p2 .player-zone.p3 .player-zone.p4 
@@ -1113,4 +1113,214 @@ html[data-theme="hitster"] .app-version{
 html[data-theme="hitster"] .time-up-text{
   color:#ff67ac !important;
   text-shadow:3px 3px 0 #140912, 6px 6px 0 rgba(255,215,94,.30), 0 12px 30px rgba(0,0,0,.55) !important;
+}
+
+
+/* v40 - sterkere neon Hitster-stijl op basis van logo/verpakking */
+html[data-theme="hitster"]{
+  --bg:#02060b;
+  --surface:#07111a;
+  --surface-2:#0b1722;
+  --surface-3:#112031;
+  --input-bg:#061019;
+  --border:#1f3447;
+  --text:#f7fbff;
+  --muted:#9bb2c6;
+  --primary-bg:#ff2fa4;
+  --primary-text:#ffffff;
+  --overlay:rgba(1,5,10,.82);
+  --status-bg:#07111a;
+}
+
+html[data-theme="hitster"],
+html[data-theme="hitster"] body,
+html[data-theme="hitster"] #app,
+html[data-theme="hitster"] .screen,
+html[data-theme="hitster"] .game-screen,
+html[data-theme="hitster"] .setup-screen,
+html[data-theme="hitster"] .board{
+  background:#02060b !important;
+  color:#f7fbff !important;
+}
+
+html[data-theme="hitster"] .setup-screen{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,47,164,.10) 0 11%, transparent 11.5%),
+    radial-gradient(circle at 50% 50%, rgba(255,226,0,.09) 0 18%, transparent 18.5%),
+    radial-gradient(circle at 50% 50%, rgba(0,174,255,.10) 0 25%, transparent 25.5%),
+    radial-gradient(circle at 50% 50%, rgba(255,111,26,.08) 0 32%, transparent 32.5%),
+    linear-gradient(180deg,#04111a 0%, #02060b 100%) !important;
+}
+
+html[data-theme="hitster"] .setup-card,
+html[data-theme="hitster"] .modal-card{
+  background:linear-gradient(180deg, rgba(8,18,28,.97), rgba(4,10,16,.98)) !important;
+  border:1px solid rgba(55,116,173,.55) !important;
+  box-shadow:
+    0 0 0 1px rgba(0,174,255,.10),
+    0 22px 60px rgba(0,0,0,.55),
+    0 0 34px rgba(0,174,255,.08) !important;
+}
+
+html[data-theme="hitster"] .setup-title{
+  color:#ff47b1 !important;
+  text-transform:uppercase;
+  letter-spacing:-.04em;
+  text-shadow:
+    0 0 6px rgba(255,71,177,.95),
+    0 0 18px rgba(255,71,177,.85),
+    0 0 34px rgba(255,71,177,.55) !important;
+}
+
+html[data-theme="hitster"] .setup-subtitle,
+html[data-theme="hitster"] .setup-version{
+  color:#8eb8de !important;
+}
+
+html[data-theme="hitster"] .player-count-label,
+html[data-theme="hitster"] .modal-head h2,
+html[data-theme="hitster"] h3{
+  color:#ff47b1 !important;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  text-shadow:0 0 10px rgba(255,71,177,.30);
+}
+
+html[data-theme="hitster"] .segmented button,
+html[data-theme="hitster"] .secondary,
+html[data-theme="hitster"] .theme-choice,
+html[data-theme="hitster"] .next-round,
+html[data-theme="hitster"] .setup-settings-btn{
+  background:linear-gradient(180deg,#0d1b29,#07111a) !important;
+  color:#e9f6ff !important;
+  border:1px solid #275074 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 0 0 1px rgba(0,174,255,.06) !important;
+}
+
+html[data-theme="hitster"] .segmented button.active,
+html[data-theme="hitster"] #hitsterModeBtn.theme-choice.active{
+  background:linear-gradient(180deg,#ff47b1,#d81f84) !important;
+  color:#fff !important;
+  border:1px solid #ff6ac0 !important;
+  box-shadow:
+    0 0 0 1px rgba(255,71,177,.18),
+    0 0 16px rgba(255,71,177,.35),
+    0 0 28px rgba(255,71,177,.22) !important;
+}
+
+html[data-theme="hitster"] .theme-setting,
+html[data-theme="hitster"] .question-check,
+html[data-theme="hitster"] .field,
+html[data-theme="hitster"] .switch-row{
+  background:#0a1520 !important;
+  color:#f7fbff !important;
+  border:1px solid #20384d !important;
+}
+
+html[data-theme="hitster"] .theme-toggle{
+  background:#050d15 !important;
+  border:1px solid #20384d !important;
+}
+
+html[data-theme="hitster"] .name-fields input,
+html[data-theme="hitster"] .field input{
+  background:#061019 !important;
+  color:#ffffff !important;
+  border:1px solid #2d4b66 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,174,255,.04),
+    0 0 0 1px rgba(0,0,0,0) !important;
+}
+
+html[data-theme="hitster"] .name-fields input:focus,
+html[data-theme="hitster"] .field input:focus{
+  border-color:#00aeff !important;
+  box-shadow:
+    0 0 0 1px rgba(0,174,255,.18),
+    0 0 14px rgba(0,174,255,.18) !important;
+}
+
+html[data-theme="hitster"] .save-settings{
+  background:linear-gradient(180deg,#1fbf69,#17844a) !important;
+  color:#fff !important;
+  border:1px solid #4de08f !important;
+  box-shadow:0 0 14px rgba(31,191,105,.18) !important;
+}
+
+html[data-theme="hitster"] .danger{
+  background:linear-gradient(180deg,#c43a3a,#912828) !important;
+  color:#fff !important;
+  border:1px solid #ff6c6c !important;
+}
+
+html[data-theme="hitster"] #startGame.start-game-green{
+  background:linear-gradient(180deg,#1fbf69,#17844a) !important;
+  color:#fff !important;
+  border:1px solid #4de08f !important;
+  box-shadow:0 0 18px rgba(31,191,105,.20) !important;
+}
+
+html[data-theme="hitster"] .settings-gear{
+  background:linear-gradient(180deg,#0d1b29,#07111a) !important;
+  color:#ff47b1 !important;
+  border:1px solid #275074 !important;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.35),
+    0 0 16px rgba(255,71,177,.18) !important;
+}
+
+html[data-theme="hitster"] .next-round{
+  color:#00b7ff !important;
+  border-color:#1d6d97 !important;
+  box-shadow:0 0 16px rgba(0,174,255,.15) !important;
+}
+
+html[data-theme="hitster"] .winner-view,
+html[data-theme="hitster"] .winner-mini{
+  color:#ffffff !important;
+  text-shadow:
+    0 0 10px rgba(255,71,177,.30),
+    0 0 22px rgba(255,71,177,.20),
+    0 3px 22px rgba(0,0,0,.55) !important;
+}
+
+html[data-theme="hitster"] .time-up-text{
+  color:#ff47b1 !important;
+  text-shadow:
+    0 0 8px rgba(255,71,177,.95),
+    0 0 22px rgba(255,71,177,.80),
+    0 0 36px rgba(255,71,177,.45),
+    0 8px 26px rgba(0,0,0,.55) !important;
+}
+
+html[data-theme="hitster"] .question-wrap{
+  color:#fff !important;
+}
+
+html[data-theme="hitster"] .question-box{
+  border:1px solid rgba(255,255,255,.10) !important;
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.48),
+    0 0 0 1px rgba(0,174,255,.05),
+    0 0 28px rgba(0,174,255,.05) !important;
+}
+
+html[data-theme="hitster"] .app-version{
+  background:#061019 !important;
+  color:#6ea9d8 !important;
+  border:1px solid #20384d !important;
+}
+
+html[data-theme="hitster"] .modal{
+  background:rgba(1,7,12,.84) !important;
+}
+
+html[data-theme="hitster"] .close{
+  color:#ff47b1 !important;
+}
+
+html[data-theme="hitster"] input[type="checkbox"]{
+  accent-color:#ff47b1;
 }

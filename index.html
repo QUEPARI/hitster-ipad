@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#0d0f14" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=39" />
+  <link rel="manifest" href="./manifest.webmanifest?v=40" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=39" />
+  <link rel="stylesheet" href="./styles.css?v=40" />
 </head>
 <body>
   <main id="app">
@@ -27,7 +27,7 @@
         <button id="setupSettingsBtn" class="secondary big setup-settings-btn">Instellingen</button>
         <button id="startGame" class="primary big start-game-green">Start spel</button>
       </div>
-      <div class="setup-version">V39 PWA</div>
+      <div class="setup-version">V40 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -88,14 +88,14 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v39 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v40 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=39"></script>
+  <script src="./app.js?v=40"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=39'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=40'));
     }
   </script>
 </body>
