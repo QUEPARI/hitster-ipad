@@ -213,3 +213,5 @@ v48 PWA:
 
 
 v50 PWA: oude Chrome parsefout door optional chaining verwijderd; diagnostische foutmelding als spelcode niet laadt; overige v48 opmaak intact.
+
+v51 PWA: winnaarsnaam behoudt neon-effect in spelerskleur; aanvullende Android-startdiagnose.

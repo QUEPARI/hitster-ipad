@@ -1636,3 +1636,14 @@ html[data-theme="hitster"] #winnerView{
   box-sizing:border-box;
   animation:timeup-pop 1.5s ease both;
 }
+
+
+/* v51: neon winnaarsnaam in de kleur van de speler, met dezelfde vormgeving. */
+html[data-theme="hitster"] #winnerView{
+  color:var(--winner-color,#E5007D) !important;
+  -webkit-text-stroke:.65px var(--winner-color,#E5007D) !important;
+  text-shadow:0 0 2px var(--winner-color,#E5007D),
+    0 0 6px var(--winner-color,#E5007D),
+    0 0 13px var(--winner-color,#E5007D),
+    0 0 24px var(--winner-color,#E5007D) !important;
+}

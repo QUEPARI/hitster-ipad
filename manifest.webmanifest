@@ -1,7 +1,7 @@
 {
   "name": "Hitster Buzzer",
   "short_name": "Hitster Buzzer",
-  "description": "Hitster Buzzer v50 PWA",
+  "description": "Hitster Buzzer v51 PWA",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
