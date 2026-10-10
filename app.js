@@ -1,4 +1,4 @@
-const APP_VERSION = 'v32 PWA';
+const APP_VERSION = 'v33 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -55,6 +55,7 @@ function updateSettingsGear(){
 }
 
 function pauseQuestionForSettings(){
+  clearQuestionTension();
   if(state.phase !== 'question') return;
   settingsPausedQuestion = true;
   if(questionDeadline){
@@ -73,7 +74,7 @@ function resumeQuestionAfterSettings(){
 
   timerText.textContent = state.showTimer ? format(left) : '';
   timerText.classList.toggle('hidden', !state.showTimer);
-  updateQuestionTension(left);
+  updateQuestionTension();
 
   if(left <= 0){
     startRound();
@@ -208,6 +209,11 @@ function fitQuestionToOneLine(){
 }
 
 
+
+let tensionRaf = null;
+let tensionPhase = 0;
+let tensionLastFrame = 0;
+
 function hexToRgb(hex){
   const value=hex.replace('#','');
   const n=parseInt(value.length===3 ? value.split('').map(c=>c+c).join('') : value,16);
@@ -224,39 +230,80 @@ function mixHex(hex,target,t){
   return `rgb(${mixChannel(c.r,targetRgb.r,t)}, ${mixChannel(c.g,targetRgb.g,t)}, ${mixChannel(c.b,targetRgb.b,t)})`;
 }
 
-function updateQuestionTension(remaining){
-  if(!questionBox || !state.question){
+function renderQuestionTensionFrame(ts){
+  if(state.phase!=='question' || settingsPausedQuestion || !state.question || !questionDeadline){
+    clearQuestionTension();
     return;
   }
 
-  if(remaining>10 || remaining<=0){
-    questionBox.classList.remove('tension-active');
-    questionBox.style.removeProperty('--pulse-light');
-    questionBox.style.removeProperty('--pulse-dark');
-    questionBox.style.removeProperty('--pulse-duration');
+  const remainingMs=Math.max(0,questionDeadline-Date.now());
+
+  if(remainingMs<=0){
+    clearQuestionTension();
+    return;
+  }
+
+  if(remainingMs>10000){
     questionBox.style.background=state.question.color;
+    questionBox.style.transform='';
+    questionBox.style.boxShadow='';
+    tensionLastFrame=ts;
+    tensionRaf=requestAnimationFrame(renderQuestionTensionFrame);
     return;
   }
 
-  const progress=(10-remaining)/9; // 0 bij 10 sec, 1 bij 1 sec
+  const progress=Math.min(1,Math.max(0,1-(remainingMs/10000)));
   const eased=progress*progress;
 
-  const lightMix=0.08 + eased*0.26;
-  const darkMix=0.07 + eased*0.28;
-  const duration=1.25 - eased*0.80; // 1.25s -> 0.45s
+  const dt=tensionLastFrame ? Math.min(50,ts-tensionLastFrame) : 16.67;
+  tensionLastFrame=ts;
 
-  questionBox.style.setProperty('--pulse-light', mixHex(state.question.color,'white',lightMix));
-  questionBox.style.setProperty('--pulse-dark', mixHex(state.question.color,'black',darkMix));
-  questionBox.style.setProperty('--pulse-duration', `${duration.toFixed(2)}s`);
-  questionBox.classList.add('tension-active');
+  // Van rustig naar sterk: ongeveer 0,65 -> 3,1 pulsen per seconde.
+  const pulsesPerSecond=0.65 + eased*2.45;
+  tensionPhase += (dt/1000) * pulsesPerSecond * Math.PI * 2;
+
+  // Volledig vloeiende sinus, 0..1.
+  const wave=(Math.sin(tensionPhase)+1)/2;
+
+  // Richting 0 wordt de helderheidsuitslag sterker.
+  const lightMix=(0.035 + eased*0.24) * wave;
+  const darkMix=(0.025 + eased*0.25) * (1-wave);
+
+  let background=state.question.color;
+  if(wave>=0.5){
+    background=mixHex(state.question.color,'white',lightMix);
+  }else{
+    background=mixHex(state.question.color,'black',darkMix);
+  }
+
+  const scaleAmount=0.002 + eased*0.008;
+  const scale=1 + (wave-0.5)*2*scaleAmount;
+
+  const glow=0.05 + eased*0.13;
+  questionBox.style.background=background;
+  questionBox.style.transform=`scale(${scale.toFixed(4)})`;
+  questionBox.style.boxShadow=`0 15px 50px rgba(0,0,0,.30), 0 0 ${Math.round(12+eased*18)}px rgba(255,255,255,${(glow*wave).toFixed(3)})`;
+
+  tensionRaf=requestAnimationFrame(renderQuestionTensionFrame);
+}
+
+function updateQuestionTension(){
+  if(tensionRaf) return;
+  tensionPhase=0;
+  tensionLastFrame=0;
+  tensionRaf=requestAnimationFrame(renderQuestionTensionFrame);
 }
 
 function clearQuestionTension(){
+  if(tensionRaf){
+    cancelAnimationFrame(tensionRaf);
+    tensionRaf=null;
+  }
+  tensionPhase=0;
+  tensionLastFrame=0;
   if(!questionBox) return;
-  questionBox.classList.remove('tension-active');
-  questionBox.style.removeProperty('--pulse-light');
-  questionBox.style.removeProperty('--pulse-dark');
-  questionBox.style.removeProperty('--pulse-duration');
+  questionBox.style.transform='';
+  questionBox.style.boxShadow='';
   if(state.question) questionBox.style.background=state.question.color;
 }
 
@@ -264,14 +311,14 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
   let left=state.questionSeconds;
   timerText.textContent=state.showTimer?format(left):'';
   timerText.classList.toggle('hidden',!state.showTimer);
-  updateQuestionTension(left);
+  updateQuestionTension();
   if(state.timer)clearTimeout(state.timer);
   questionDeadline=Date.now()+left*1000;
   const tick=()=>{
     if(state.phase!=='question' || settingsPausedQuestion)return;
     const remaining=Math.max(0,Math.ceil((questionDeadline-Date.now())/1000));
     if(state.showTimer)timerText.textContent=format(remaining);
-    updateQuestionTension(remaining);
+    updateQuestionTension();
     if(remaining<=0){
       questionDeadline=null;
       startRound();

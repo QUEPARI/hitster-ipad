@@ -124,3 +124,9 @@ v32 PWA:
 - Richting 0 wordt het effect steeds sneller en sterker.
 - De originele vraagkleur blijft de basis.
 - Effect stopt direct bij een nieuwe fase/ronde.
+
+
+v33 PWA:
+- Timer-spanning volledig frame-gebaseerd gemaakt met requestAnimationFrame.
+- Pulsfrequentie en intensiteit lopen continu op van 10 naar 0 seconden.
+- Geen sprongen meer bij hele seconden of wisselende CSS-animation-duration.
