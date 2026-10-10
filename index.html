@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=48" />
+  <link rel="manifest" href="./manifest.webmanifest?v=49" />
   <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=48" />
+  <link rel="stylesheet" href="./styles.css?v=49" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1 class="setup-brand" aria-label="Hitster Buzzer">
-          <img class="hitster-logo" src="./hitster-logo-v48.png?v=48" alt="Hitster" />
+          <img class="hitster-logo" src="./hitster-logo-v48.png?v=49" alt="Hitster" />
           <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
         </h1>
         <div class="player-count-label">Aantal spelers</div>
@@ -28,7 +28,7 @@
         </div>
         <div id="nameFields" class="name-fields"></div>
         <div class="setup-actions">
-          <button type="button" id="startGame" class="primary big start-game-green" type="button">Start spel</button>
+          <button type="button" id="startGame" class="primary big start-game-green">Start spel</button>
           <button id="setupSettingsBtn" class="setup-gear" type="button" aria-label="Instellingen" title="Instellingen">
             <svg viewBox="0 0 512 512" aria-hidden="true">
           <path d="M487.4 315.7l-42.6-24.6c2-11.3 3.2-23 3.2-35.1s-1.2-23.8-3.2-35.1l42.6-24.6c11.8-6.8 15.8-21.9 9-33.7l-32-55.4c-6.8-11.8-21.9-15.8-33.7-9l-42.6 24.6c-17.8-15-38-26.8-60.1-34.7V39.2c0-13.6-11-24.6-24.6-24.6h-64c-13.6 0-24.6 11-24.6 24.6v49.1c-22.1 7.9-42.3 19.7-60.1 34.7L112 98.4c-11.8-6.8-26.9-2.8-33.7 9l-32 55.4c-6.8 11.8-2.8 26.9 9 33.7l42.6 24.6c-2 11.3-3.2 23-3.2 35.1s1.2 23.8 3.2 35.1l-42.6 24.6c-11.8 6.8-15.8 21.9-9 33.7l32 55.4c6.8 11.8 21.9 15.8 33.7 9l42.6-24.6c17.8 15 38 26.8 60.1 34.7v49.1c0 13.6 11 24.6 24.6 24.6h64c13.6 0 24.6-11 24.6-24.6v-49.1c22.1-7.9 42.3-19.7 60.1-34.7l42.6 24.6c11.8 6.8 26.9 2.8 33.7-9l32-55.4c6.9-11.8 2.9-26.9-8.9-33.7zM271.5 336c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z"></path>
@@ -37,7 +37,7 @@
         </div>
         <p id="startError" class="start-error hidden" role="alert"></p>
       </div>
-      <div class="setup-version">V48 PWA</div>
+      <div class="setup-version">V49 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -90,14 +90,34 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v47 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v49 PWA</div>
     </div>
   </div>
 
-  <script src="./app.js?v=48"></script>
+  <script>
+    /* v49: foutdiagnose als app.js niet kan laden of uitvoeren. */
+    window.__hitsterReady = false;
+    function hitsterReportError(message) {
+      var element = document.getElementById('startError');
+      if (!element) return;
+      element.textContent = 'Android-diagnose: ' + message;
+      element.classList.remove('hidden');
+    }
+    window.addEventListener('error', function(event) {
+      if (!window.__hitsterReady) {
+        hitsterReportError((event && event.message && event.message !== 'Script error.') ? event.message : 'JavaScript is niet geladen of geblokkeerd.');
+      }
+    });
+    window.addEventListener('load', function() {
+      window.setTimeout(function() {
+        if (!window.__hitsterReady) hitsterReportError('De spelcode kon niet starten. Probeer Chrome bij te werken of stuur deze melding door.');
+      }, 1200);
+    });
+  </script>
+  <script src="./app.js?v=49"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=48'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=49'));
     }
   </script>
 </body>

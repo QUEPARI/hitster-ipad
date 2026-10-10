@@ -210,3 +210,6 @@ v48 PWA:
 - Nieuw transparant Hitster-logo (hitster-logo-v48.png).
 - TIJD IS OM en de winnaar getoond in de roze neonstijl van BUZZER.
 - Android-aanpassingen uit v47 behouden.
+
+
+v49 PWA: oude Chrome parsefout door optional chaining verwijderd; diagnostische foutmelding als spelcode niet laadt; overige v48 opmaak intact.

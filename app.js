@@ -1,4 +1,4 @@
-const APP_VERSION = 'v48 PWA';
+const APP_VERSION = 'v49 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -227,7 +227,7 @@ function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence()
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
 function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
-function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=(state.question ? state.question.id : null);let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
+function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=(state.question ? state.question.id : null);let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0] && arr[0].id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
 function nextQuestion(){if(!state.bag.length)refillBag();return state.bag.shift()}
 
 function fitQuestionToOneLine(){
@@ -369,7 +369,7 @@ function showQuestion(){state.phase='question';updateSettingsGear();state.questi
   };
   state.timer=setTimeout(tick,250);
 }
-function format(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+function format(s){return `${Math.floor(s/60)}:${('0'+(s%60)).slice(-2)}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
 function resetToSetup(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
@@ -387,3 +387,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 document.addEventListener('DOMContentLoaded', ()=>{
   forceCloseAllModals();
 });
+
+// v49: succesvolle volledige initialisatie van de app-code.
+window.__hitsterReady = true;
