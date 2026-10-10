@@ -218,3 +218,8 @@ v51 PWA: winnaarsnaam behoudt neon-effect in spelerskleur; aanvullende Android-s
 
 
 v52: Winnaarsnaam heeft exact hetzelfde font, formaat en animatie als TIJD IS OM, met spelerskleur. Android startknop ondersteunt touchend en click met anti-dubbelstart.
+
+
+v53 PWA:
+- Winnaar heeft dezelfde witte/lichtroze letters, letteromranding, grootte en animatie als TIJD IS OM!. Alleen neon-gloed in spelerskleur.
+- Android-diagnose toont een specifieke stap indien de knop aantoonbaar wordt aangeraakt maar het startscherm blijft staan.

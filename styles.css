@@ -1680,3 +1680,27 @@ html[data-theme="hitster"] #board.winner-phase .center-panel{
 /* Android hit-testing: keep the start action on top of visual decoration. */
 #setup .setup-actions{position:relative;z-index:5;}
 #setup #startGame{position:relative;z-index:6;pointer-events:auto;touch-action:manipulation;cursor:pointer;}
+
+
+/* v53: identieke witte neonletters bij winnaar en TIJD IS OM; alleen gloed wisselt per speler. */
+html[data-theme="hitster"] #winnerView,
+html[data-theme="hitster"] #timeUpText {
+  color:#FFB7E0 !important;
+  -webkit-text-stroke:.65px #FFE6F4 !important;
+  font-family:"Helvetica Neue","Segoe UI Light","Arial Narrow",Arial,sans-serif !important;
+  font-size:clamp(37px,6.2vw,84px) !important;
+  font-weight:200 !important;
+  font-style:normal !important;
+  letter-spacing:.10em !important;
+  line-height:1.2 !important;
+  text-transform:uppercase !important;
+  text-align:center !important;
+  animation:timeup-pop 1.5s ease both;
+}
+html[data-theme="hitster"] #winnerView {
+  --neon-tone:var(--winner-color,#E5007D);
+  text-shadow:0 0 2px #FFF,0 0 6px var(--neon-tone),0 0 13px var(--neon-tone),0 0 24px var(--neon-tone) !important;
+}
+html[data-theme="hitster"] #timeUpText {
+  text-shadow:0 0 2px #FFF,0 0 6px #E5007D,0 0 13px #E5007D,0 0 24px rgba(229,0,125,.8) !important;
+}

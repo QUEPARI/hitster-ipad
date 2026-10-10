@@ -1,4 +1,4 @@
-const APP_VERSION = 'v52 PWA';
+const APP_VERSION = 'v53 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -191,6 +191,7 @@ $('#resetBtn').onclick=()=>{
 };
 // v47: expliciete startafhandeling en foutmelding voor mobiele browsers.
 function startGameSafely(){
+  window.__hitsterStartStage = 'Startfunctie aangeroepen';
   try {
     const inputs=$$('#nameFields input');
     for(let i=0;i<state.count;i++){
@@ -198,20 +199,24 @@ function startGameSafely(){
       const value=field ? field.value.trim() : '';
       state.names[i]=value||('Speler '+(i+1));
     }
+    window.__hitsterStartStage = 'Namen verwerkt';
     syncSettings();
+    window.__hitsterStartStage = 'Instellingen verwerkt';
     board.className='board players-'+state.count;
     $$('.player-zone').forEach(z=>z.classList.remove('winner','disabled','phase-hidden'));
     setup.classList.add('hidden');
     game.classList.remove('hidden');
+    window.__hitsterStartStage = 'Spelscherm geopend';
     state.phase='idle';
     updateSettingsGear();
     startRound();
+    window.__hitsterStartStage = 'Spel gestart';
   } catch(err){
     setup.classList.remove('hidden');
     game.classList.add('hidden');
     const errorEl=document.getElementById('startError');
     if(errorEl){
-      errorEl.textContent='Starten mislukt: '+(err && err.message ? err.message : 'Onbekende fout');
+      errorEl.textContent='Starten mislukt bij '+(window.__hitsterStartStage || 'onbekende stap')+': '+(err && err.message ? err.message : 'Onbekende fout');
       errorEl.classList.remove('hidden');
     }
     if(window.console && console.error) console.error('Hitster start error',err);
@@ -226,6 +231,7 @@ function activateStart(event){
   if(now-lastStartActivation<850) return;
   lastStartActivation=now;
   window.__hitsterStartClicked=true;
+  window.__hitsterStartStage='Aanraking verwerkt ('+(event ? event.type : 'direct')+')';
   const errorEl=document.getElementById('startError');
   if(errorEl) errorEl.classList.add('hidden');
   startGameSafely();
