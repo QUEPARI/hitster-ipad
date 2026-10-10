@@ -85,3 +85,11 @@ v26 PWA:
 - Hitster Buzzer gecentreerd in de startbox.
 - Alleen V26 PWA onder de box, gecentreerd.
 - Spelerskeuze toont Aantal spelers met knoppen 2 / 3 / 4.
+
+
+v27 PWA:
+- Tandwiel terug tijdens het tonen van de vraag.
+- Tandwiel verwijderd van het beginscherm.
+- Normale Instellingen-knop boven Start spel op het beginscherm.
+- Start spel knop groen gemaakt.
+- Versie bijgewerkt naar v27 PWA.

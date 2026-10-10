@@ -1,4 +1,4 @@
-const APP_VERSION = 'v26 PWA';
+const APP_VERSION = 'v27 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -49,8 +49,9 @@ let settingsPausedQuestion = false;
 function updateSettingsGear(){
   const gear = document.getElementById('settingsGear');
   if(!gear) return;
-  const setupVisible = !setup.classList.contains('hidden');
-  gear.classList.toggle('hidden', !setupVisible);
+  const gameVisible = !game.classList.contains('hidden');
+  const shouldShow = gameVisible && state.phase === 'question';
+  gear.classList.toggle('hidden', !shouldShow);
 }
 
 function pauseQuestionForSettings(){
@@ -139,9 +140,18 @@ function syncSettings(){
   manualStart.classList.add('hidden');
 }
 
+
+const setupSettingsBtn=document.getElementById('setupSettingsBtn');
+if(setupSettingsBtn){
+  setupSettingsBtn.onclick=()=>{
+    $('#settingsModal').classList.remove('hidden');
+  };
+}
+
 const settingsGear=document.getElementById('settingsGear');
 if(settingsGear){
   settingsGear.onclick=()=>{
+    pauseQuestionForSettings();
     $('#settingsModal').classList.remove('hidden');
   };
 }

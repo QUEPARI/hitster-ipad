@@ -599,3 +599,24 @@ html[data-theme="dark"] .settings-gear{
 #game .settings-gear{
   display:none !important;
 }
+
+
+/* v27 - startscherm knoppen en tandwiel tijdens vraag */
+.setup-settings-btn{
+  width:100%;
+  margin-bottom:10px;
+}
+
+.start-game-green{
+  background:#2e9d57 !important;
+  color:#ffffff !important;
+  border:1px solid #2e9d57 !important;
+}
+
+#setup .settings-gear{
+  display:none !important;
+}
+
+#game .settings-gear{
+  display:flex;
+}
