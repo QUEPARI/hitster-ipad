@@ -1,12 +1,14 @@
-const CACHE = "hitster-ipad-v42";
+const CACHE = "hitster-ipad-v43";
 const ASSETS = [
-  "./styles.css?v=42",
-  "./app.js?v=42",
-  "./assets/hitster-logo.png",
-  "./manifest.webmanifest?v=42",
-  "./icons/icon-180.png",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./",
+  "./index.html",
+  "./styles.css?v=43",
+  "./app.js?v=43",
+  "./hitster-logo.png",
+  "./manifest.webmanifest?v=43",
+  "./icon-180.png",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", event => {
