@@ -150,3 +150,10 @@ v36 PWA:
 - Discobal en explosie verwijderd.
 - 'TIJD IS OP!' blijft 1,5 seconde zichtbaar.
 - Daarna direct terug naar de buzzerknoppen.
+
+
+v37 PWA:
+- Derde weergavemodus toegevoegd: Hitster.
+- Hitster-modus gebruikt een energieke party-look met zwart, gebroken wit, geel en roze accenten.
+- Dark en Light blijven ongewijzigd beschikbaar.
+- Gekozen thema wordt opgeslagen.
