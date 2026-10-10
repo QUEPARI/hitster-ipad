@@ -1554,3 +1554,11 @@ html[data-theme="hitster"] #setupSettingsBtn.setup-gear{
   .setup-actions{gap:8px}
   html[data-theme="hitster"] #setupSettingsBtn.setup-gear{flex-basis:58px;min-width:58px;width:58px}
 }
+
+
+/* v44: question text and timer use exactly the same shadow/glow in Hitster mode. */
+html[data-theme="hitster"] #timerText,
+html[data-theme="hitster"] #questionText,
+html[data-theme="hitster"] .question-box.is-light-question #questionText{
+  text-shadow:0 2px 10px rgba(0,0,0,.28) !important;
+}

@@ -190,7 +190,7 @@ v41 PWA:
 v42: vaste Hitster-modus zonder weergavekeuze; logo van ingestuurde afbeelding en neon BUZZER; roze verloop spelerskeuze; opdrachttekst met glow; speelveldachtergrond #00161D; bestaande spelerkleuren behouden.
 
 
-v43 PWA:
+v44 PWA:
 - Hitster-logo laadt uit dezelfde hoofdmap als index.html, zoals in de GitHub-repository.
 - Alle bestanden en iconen staan in de root; geen mappen uploaden of maken.
 - De opdrachttekst heeft een donkere/zwartgekleurde glow.
