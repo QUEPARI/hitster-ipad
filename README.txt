@@ -77,3 +77,11 @@ v25 PWA:
 - Aparte Parameters-popup verwijderd.
 - Groene Opslaan-knop toegevoegd; deze past instellingen toe en sluit de popup.
 - Versie bijgewerkt naar v25 PWA.
+
+
+v26 PWA:
+- Instellingenknop alleen zichtbaar op het startscherm.
+- Instellingenknop verwijderd tijdens vraag/spel.
+- Hitster Buzzer gecentreerd in de startbox.
+- Alleen V26 PWA onder de box, gecentreerd.
+- Spelerskeuze toont Aantal spelers met knoppen 2 / 3 / 4.

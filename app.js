@@ -1,4 +1,4 @@
-const APP_VERSION = 'v25 PWA';
+const APP_VERSION = 'v26 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -49,9 +49,8 @@ let settingsPausedQuestion = false;
 function updateSettingsGear(){
   const gear = document.getElementById('settingsGear');
   if(!gear) return;
-  const gameVisible = !game.classList.contains('hidden');
-  const shouldShow = gameVisible && state.phase === 'question';
-  gear.classList.toggle('hidden', !shouldShow);
+  const setupVisible = !setup.classList.contains('hidden');
+  gear.classList.toggle('hidden', !setupVisible);
 }
 
 function pauseQuestionForSettings(){
@@ -143,7 +142,6 @@ function syncSettings(){
 const settingsGear=document.getElementById('settingsGear');
 if(settingsGear){
   settingsGear.onclick=()=>{
-    pauseQuestionForSettings();
     $('#settingsModal').classList.remove('hidden');
   };
 }
@@ -170,7 +168,7 @@ $('#resetBtn').onclick=()=>{
   pausedQuestionRemaining=null;
   resetToSetup();
 };
-$('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
+$('#startGame').onclick=()=>{for(let i=0;i<state.count;i++){const v=$('#nameFields input:nth-child('+(i+1)+')').value.trim();state.names[i]=v||`Speler ${i+1}`};setup.classList.add('hidden');game.classList.remove('hidden');updateSettingsGear();board.className=`board players-${state.count}`;$$('.player-zone').forEach((z,i)=>{z.classList.remove('winner','disabled','phase-hidden')});syncSettings();state.phase='idle';updateSettingsGear();startRound()};
 function showIdle(){clearTimers();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
 function startRound(){clearTimers();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;

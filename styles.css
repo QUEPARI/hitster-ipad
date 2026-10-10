@@ -563,3 +563,39 @@ html[data-theme="dark"] .settings-gear{
 .save-settings:active{
   transform:scale(.99);
 }
+
+
+/* v26 - startscherm layout */
+.setup-screen{
+  position:relative;
+  place-items:center;
+  padding:24px;
+}
+.setup-title{
+  text-align:center;
+  width:100%;
+  margin-bottom:22px !important;
+}
+.player-count-label{
+  font-weight:900;
+  font-size:18px;
+  margin:0 0 10px;
+  text-align:left;
+}
+.setup-version{
+  position:absolute;
+  left:50%;
+  bottom:max(18px, env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  color:var(--muted);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-align:center;
+}
+#setup .settings-gear{
+  display:flex;
+}
+#game .settings-gear{
+  display:none !important;
+}
