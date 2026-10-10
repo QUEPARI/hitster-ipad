@@ -837,3 +837,161 @@ html[data-theme="light"] #lightModeBtn.theme-choice.active{
 .b10{transform:translate(-50%,-50%) rotate(270deg)}
 .b11{transform:translate(-50%,-50%) rotate(300deg)}
 .b12{transform:translate(-50%,-50%) rotate(330deg)}
+
+
+/* v35 - grotere, gedetailleerdere cartoon-discobal + heftigere explosie */
+.disco-stage{
+  width:min(46vw, 320px) !important;
+  aspect-ratio:1/1.28 !important;
+}
+
+.disco-rope{
+  width:5px !important;
+  height:72px !important;
+  box-shadow:0 0 8px rgba(255,255,255,.25);
+}
+
+.disco-ball{
+  margin-top:-4px !important;
+  width:min(34vw, 230px) !important;
+  background:
+    radial-gradient(circle at 24% 22%, rgba(255,255,255,1), rgba(255,255,255,.45) 9%, rgba(255,255,255,0) 18%),
+    radial-gradient(circle at 68% 30%, rgba(255,255,255,.55), rgba(255,255,255,0) 16%),
+    linear-gradient(90deg,
+      rgba(255,255,255,.30) 0 3%, transparent 3% 9%,
+      rgba(255,255,255,.14) 9% 12%, transparent 12% 18%,
+      rgba(255,255,255,.26) 18% 21%, transparent 21% 27%,
+      rgba(255,255,255,.15) 27% 30%, transparent 30% 36%,
+      rgba(255,255,255,.28) 36% 39%, transparent 39% 45%,
+      rgba(255,255,255,.12) 45% 48%, transparent 48% 54%,
+      rgba(255,255,255,.26) 54% 57%, transparent 57% 63%,
+      rgba(255,255,255,.14) 63% 66%, transparent 66% 72%,
+      rgba(255,255,255,.26) 72% 75%, transparent 75% 81%,
+      rgba(255,255,255,.14) 81% 84%, transparent 84% 90%,
+      rgba(255,255,255,.24) 90% 93%, transparent 93% 100%),
+    linear-gradient(0deg,
+      rgba(255,255,255,.26) 0 3%, transparent 3% 9%,
+      rgba(255,255,255,.13) 9% 12%, transparent 12% 18%,
+      rgba(255,255,255,.23) 18% 21%, transparent 21% 27%,
+      rgba(255,255,255,.14) 27% 30%, transparent 30% 36%,
+      rgba(255,255,255,.25) 36% 39%, transparent 39% 45%,
+      rgba(255,255,255,.12) 45% 48%, transparent 48% 54%,
+      rgba(255,255,255,.24) 54% 57%, transparent 57% 63%,
+      rgba(255,255,255,.13) 63% 66%, transparent 66% 72%,
+      rgba(255,255,255,.23) 72% 75%, transparent 75% 81%,
+      rgba(255,255,255,.12) 81% 84%, transparent 84% 90%,
+      rgba(255,255,255,.22) 90% 93%, transparent 93% 100%),
+    radial-gradient(circle at 50% 58%, #fcfcff 0%, #d8dce5 28%, #8f97a5 56%, #434955 76%, #20242c 100%) !important;
+  border:3px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.48),
+    inset 0 0 0 2px rgba(255,255,255,.08),
+    0 0 34px rgba(255,255,255,.18) !important;
+}
+
+.disco-ball::before,
+.disco-ball::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.disco-ball::before{
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255,255,255,.30), rgba(255,255,255,0) 20%),
+    radial-gradient(circle at 60% 62%, rgba(255,255,255,.18), rgba(255,255,255,0) 18%),
+    radial-gradient(circle at 72% 42%, rgba(255,220,160,.16), rgba(255,255,255,0) 14%);
+  mix-blend-mode:screen;
+}
+
+.disco-ball::after{
+  inset:10%;
+  border:2px dashed rgba(255,255,255,.22);
+  opacity:.7;
+  animation:disco-inner-spin 2.3s linear infinite reverse;
+}
+
+.disco-core,
+.disco-highlight{
+  display:block !important;
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.disco-core{
+  inset:22%;
+  background:radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0) 70%);
+  filter:blur(1px);
+}
+
+.disco-highlight{
+  width:22%;
+  height:22%;
+  left:18%;
+  top:14%;
+  background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.32) 50%, rgba(255,255,255,0) 75%);
+}
+
+@keyframes disco-inner-spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.disco-ball.explode{
+  animation:disco-burst .70s cubic-bezier(.18,.82,.18,1) forwards !important;
+}
+
+@keyframes disco-burst{
+  0%{opacity:1;transform:scale(1) rotate(0deg);filter:brightness(1)}
+  35%{opacity:1;transform:scale(1.22) rotate(110deg);filter:brightness(1.45)}
+  75%{opacity:1;transform:scale(1.62) rotate(280deg);filter:brightness(1.75)}
+  100%{opacity:0;transform:scale(.18) rotate(360deg);filter:brightness(2)}
+}
+
+.disco-explosion{
+  top:calc(72px + min(17vw,120px)) !important;
+  width:min(62vw, 430px) !important;
+}
+
+.disco-explosion.explode{
+  animation:explosion-bloom .92s cubic-bezier(.14,.7,.18,1) forwards !important;
+}
+
+@keyframes explosion-bloom{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.18)}
+  10%{opacity:1;transform:translate(-50%,-50%) scale(.62)}
+  28%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}
+}
+
+.burst{
+  width:18px !important;
+  height:138px !important;
+  margin-left:-9px !important;
+  margin-top:-69px !important;
+  background:linear-gradient(to top,
+    rgba(255,255,255,0),
+    rgba(255,255,255,.98) 18%,
+    rgba(255,248,180,1) 44%,
+    rgba(255,188,90,.98) 68%,
+    rgba(255,106,46,.97) 100%) !important;
+  box-shadow:
+    0 0 16px rgba(255,255,255,.65),
+    0 0 28px rgba(255,198,90,.42) !important;
+}
+
+.burst::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:6px;
+  width:10px;
+  height:10px;
+  margin-left:-5px;
+  border-radius:50%;
+  background:rgba(255,255,255,.95);
+  box-shadow:0 0 12px rgba(255,255,255,.85);
+}

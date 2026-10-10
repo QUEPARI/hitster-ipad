@@ -137,3 +137,10 @@ v34 PWA:
 - Daarna valt een draaiende discobal vanaf boven in beeld.
 - Zodra de discobal volledig in beeld is, explodeert die.
 - Na de explosie start automatisch opnieuw de buzzerfase.
+
+
+v35 PWA:
+- Discobal groter en visueel rijker gemaakt.
+- Meer cartoonachtige details, highlights en extra binnenring-rotatie.
+- Explosie groter, feller en voller gemaakt.
+- Versie bijgewerkt naar v35 PWA.
