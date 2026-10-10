@@ -212,4 +212,4 @@ v48 PWA:
 - Android-aanpassingen uit v47 behouden.
 
 
-v49 PWA: oude Chrome parsefout door optional chaining verwijderd; diagnostische foutmelding als spelcode niet laadt; overige v48 opmaak intact.
+v50 PWA: oude Chrome parsefout door optional chaining verwijderd; diagnostische foutmelding als spelcode niet laadt; overige v48 opmaak intact.
