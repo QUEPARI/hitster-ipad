@@ -814,22 +814,22 @@ html[data-theme="light"] #lightModeBtn.theme-choice.active{
   100%{opacity:1;transform:scale(1)}
 }
 
-/* v38 - Hitster mode opnieuw opgebouwd vanaf DARK mode */
+/* v39 - Hitster mode: ROZE voert de boventoon, DARK als basis */
 .theme-toggle{
   grid-template-columns:repeat(3,1fr) !important;
   min-width:290px !important;
 }
 
 html[data-theme="hitster"]{
-  --bg:#0b0b0d;
-  --surface:#151518;
-  --surface-2:#202024;
-  --surface-3:#2a2a30;
-  --input-bg:#101014;
-  --border:#3b3b42;
+  --bg:#0d0910;
+  --surface:#19131b;
+  --surface-2:#241d27;
+  --surface-3:#322635;
+  --input-bg:#130f15;
+  --border:#4b394a;
   --text:#ffffff;
   --muted:#bdbdc7;
-  --primary-bg:#f4df36;
+  --primary-bg:#ff4f9d;
   --primary-text:#111111;
   --overlay:rgba(0,0,0,.76);
   --status-bg:#151518;
@@ -843,28 +843,28 @@ html[data-theme="hitster"] .screen,
 html[data-theme="hitster"] .game-screen,
 html[data-theme="hitster"] .setup-screen,
 html[data-theme="hitster"] .board{
-  background:#0b0b0d !important;
+  background:#0d0910 !important;
   color:#ffffff !important;
 }
 
 /* Startscherm: donker, met subtiele Hitster-achtige muziek/party accenten */
 html[data-theme="hitster"] .setup-screen{
   background:
-    radial-gradient(circle at 15% 18%, rgba(244,223,54,.17) 0 9%, transparent 9.5%),
-    radial-gradient(circle at 86% 77%, rgba(240,90,138,.15) 0 10%, transparent 10.5%),
-    linear-gradient(135deg,#0b0b0d 0%,#111116 55%,#0b0b0d 100%) !important;
+    radial-gradient(circle at 15% 18%, rgba(255,79,157,.17) 0 9%, transparent 9.5%),
+    radial-gradient(circle at 86% 77%, rgba(255,215,94,.055) 0 10%, transparent 10.5%),
+    linear-gradient(135deg,#0d0910 0%,#17101a 55%,#0d0910 100%) !important;
 }
 
 /* Hoofdkaarten / popups */
 html[data-theme="hitster"] .setup-card,
 html[data-theme="hitster"] .modal-card{
-  background:#151518 !important;
+  background:#19131b !important;
   color:#ffffff !important;
   border:2px solid #33333a !important;
   border-radius:22px !important;
   box-shadow:
     0 18px 55px rgba(0,0,0,.55),
-    0 0 0 1px rgba(244,223,54,.05) !important;
+    0 0 0 1px rgba(255,79,157,.05) !important;
 }
 
 /* Titel: uitgesproken maar niet te licht */
@@ -874,15 +874,15 @@ html[data-theme="hitster"] .setup-title{
   letter-spacing:-.045em;
   font-weight:1000;
   text-shadow:
-    3px 3px 0 #f4df36,
-    6px 6px 0 rgba(240,90,138,.72);
+    3px 3px 0 #ff4f9d,
+    6px 6px 0 rgba(255,215,94,.24);
 }
 
 /* Sectietitels */
 html[data-theme="hitster"] .player-count-label,
 html[data-theme="hitster"] .modal-head h2,
 html[data-theme="hitster"] h3{
-  color:#f4df36 !important;
+  color:#ff4f9d !important;
   text-transform:uppercase;
   letter-spacing:.04em;
   font-weight:1000;
@@ -893,24 +893,24 @@ html[data-theme="hitster"] .segmented button,
 html[data-theme="hitster"] .secondary,
 html[data-theme="hitster"] .theme-choice,
 html[data-theme="hitster"] .next-round{
-  background:#202024 !important;
+  background:#241d27 !important;
   color:#ffffff !important;
   border:2px solid #3c3c43 !important;
   box-shadow:none !important;
 }
 
 html[data-theme="hitster"] .segmented button.active{
-  background:#f4df36 !important;
+  background:#ff4f9d !important;
   color:#111111 !important;
-  border-color:#f4df36 !important;
-  box-shadow:0 0 0 2px rgba(244,223,54,.12), 4px 4px 0 rgba(240,90,138,.75) !important;
+  border-color:#ff4f9d !important;
+  box-shadow:0 0 0 2px rgba(255,79,157,.12), 4px 4px 0 rgba(255,215,94,.35) !important;
 }
 
 /* Instellingenvelden en opdrachtrijen blijven donker */
 html[data-theme="hitster"] .theme-setting,
 html[data-theme="hitster"] .question-check,
 html[data-theme="hitster"] .field{
-  background:#202024 !important;
+  background:#241d27 !important;
   color:#ffffff !important;
   border:1px solid #3b3b42 !important;
 }
@@ -920,16 +920,16 @@ html[data-theme="hitster"] .question-options{
 }
 
 html[data-theme="hitster"] .theme-toggle{
-  background:#0e0e11 !important;
+  background:#110d14 !important;
   border:1px solid #303036 !important;
 }
 
 /* Hitster als actieve thema-keuze */
 html[data-theme="hitster"] #hitsterModeBtn.theme-choice.active{
-  background:#f4df36 !important;
+  background:#ff4f9d !important;
   color:#111111 !important;
-  border:2px solid #f4df36 !important;
-  box-shadow:3px 3px 0 #f05a8a !important;
+  border:2px solid #ff4f9d !important;
+  box-shadow:3px 3px 0 #ffd75e !important;
   opacity:1 !important;
 }
 
@@ -941,7 +941,7 @@ html[data-theme="hitster"] #lightModeBtn.theme-choice:not(.active){
 /* DARK invoervelden, expliciet geen Light look */
 html[data-theme="hitster"] .name-fields input,
 html[data-theme="hitster"] .field input{
-  background:#0f0f13 !important;
+  background:#130f15 !important;
   color:#ffffff !important;
   border:1px solid #414149 !important;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
@@ -954,7 +954,7 @@ html[data-theme="hitster"] .field input::placeholder{
 
 /* Startpagina knoppen */
 html[data-theme="hitster"] .setup-settings-btn{
-  background:#202024 !important;
+  background:#241d27 !important;
   color:#ffffff !important;
   border:2px solid #3b3b42 !important;
   box-shadow:none !important;
@@ -978,52 +978,52 @@ html[data-theme="hitster"] .save-settings{
 html[data-theme="hitster"] .danger{
   background:#d83c3c !important;
   color:#ffffff !important;
-  border:2px solid #f05a8a !important;
+  border:2px solid #ffd75e !important;
   box-shadow:none !important;
 }
 
 /* Versie */
 html[data-theme="hitster"] .app-version{
-  background:#0e0e11 !important;
-  color:#8e8e98 !important;
+  background:#110d14 !important;
+  color:#bd9daf !important;
   border:1px solid #2d2d33 !important;
 }
 
 html[data-theme="hitster"] .setup-version{
-  color:#8e8e98 !important;
+  color:#bd9daf !important;
 }
 
-/* Tandwiel: donker met geel accent */
+/* Tandwiel: donker met roze accent */
 html[data-theme="hitster"] .settings-gear{
-  background:#202024 !important;
-  color:#f4df36 !important;
+  background:#241d27 !important;
+  color:#ff4f9d !important;
   border:2px solid #44444b !important;
   box-shadow:0 8px 24px rgba(0,0,0,.35) !important;
 }
 
 /* Volgende ronde als donkere Hitster-knop */
 html[data-theme="hitster"] .next-round{
-  background:#17171b !important;
-  color:#f4df36 !important;
-  border:2px solid #f4df36 !important;
+  background:#1c1520 !important;
+  color:#ff4f9d !important;
+  border:2px solid #ff4f9d !important;
   box-shadow:none !important;
 }
 
-/* Winnaar: donker thema, met gele/roze party accent */
+/* Winnaar: donker thema, overwegend roze met bescheiden geel detail */
 html[data-theme="hitster"] .winner-view,
 html[data-theme="hitster"] .winner-mini{
   color:#ffffff !important;
   text-shadow:
-    2px 2px 0 #f4df36,
-    4px 4px 0 rgba(240,90,138,.7) !important;
+    2px 2px 0 #ff4f9d,
+    4px 4px 0 rgba(255,215,94,.25) !important;
 }
 
 /* TIJD IS OP */
 html[data-theme="hitster"] .time-up-text{
   color:#ffffff !important;
   text-shadow:
-    3px 3px 0 #f4df36,
-    6px 6px 0 rgba(240,90,138,.8),
+    3px 3px 0 #ff4f9d,
+    6px 6px 0 rgba(255,215,94,.35),
     0 12px 30px rgba(0,0,0,.55) !important;
   font-style:italic;
 }
@@ -1037,7 +1037,7 @@ html[data-theme="hitster"] .question-box{
   border:2px solid rgba(255,255,255,.12) !important;
   box-shadow:
     0 18px 55px rgba(0,0,0,.48),
-    0 0 0 1px rgba(244,223,54,.05) !important;
+    0 0 0 1px rgba(255,79,157,.05) !important;
 }
 
 html[data-theme="hitster"] .timer-text{
@@ -1054,9 +1054,9 @@ html[data-theme="hitster"] .close{
   color:#ffffff !important;
 }
 
-/* Checkboxen geven geel accent wanneer actief */
+/* Checkboxen geven roze accent wanneer actief */
 html[data-theme="hitster"] input[type="checkbox"]{
-  accent-color:#f4df36;
+  accent-color:#ff4f9d;
 }
 
 /* Hover/tap feedback zonder Light elementen */
@@ -1064,4 +1064,53 @@ html[data-theme="hitster"] .secondary:active,
 html[data-theme="hitster"] .theme-choice:active,
 html[data-theme="hitster"] .question-check:active{
   filter:brightness(1.12);
+}
+
+
+/* v39 - verdere roze accenten en contrastrijke selectie (alleen Hitster) */
+html[data-theme="hitster"] .setup-title{
+  color:#ff67ac !important;
+  text-shadow:3px 3px 0 #09070b, 6px 6px 0 rgba(255,215,94,.22) !important;
+}
+html[data-theme="hitster"] .setup-card,
+html[data-theme="hitster"] .modal-card{
+  border-color:#58334f !important;
+  box-shadow:0 18px 55px rgba(0,0,0,.58),0 0 0 1px rgba(255,79,157,.19) !important;
+}
+html[data-theme="hitster"] .theme-setting,
+html[data-theme="hitster"] .question-check,
+html[data-theme="hitster"] .field{
+  background:#241d27 !important;
+  border-color:#493443 !important;
+}
+html[data-theme="hitster"] .name-fields input:focus,
+html[data-theme="hitster"] .field input:focus{
+  border-color:#ff4f9d !important;
+  outline:2px solid rgba(255,79,157,.22);
+  outline-offset:1px;
+}
+html[data-theme="hitster"] .segmented button.active,
+html[data-theme="hitster"] #hitsterModeBtn.theme-choice.active{
+  background:#ff4f9d !important;
+  color:#160a11 !important;
+  border-color:#ff4f9d !important;
+  box-shadow:0 0 0 2px rgba(255,79,157,.16), 3px 3px 0 rgba(255,215,94,.26) !important;
+}
+html[data-theme="hitster"] #setupSettingsBtn{
+  border-color:#77445e !important;
+}
+html[data-theme="hitster"] .question-box{
+  border:2px solid rgba(255,101,172,.30) !important;
+}
+html[data-theme="hitster"] .next-round,
+html[data-theme="hitster"] .settings-gear{
+  border-color:#ff4f9d !important;
+  color:#ff73b6 !important;
+}
+html[data-theme="hitster"] .app-version{
+  color:#d38caf !important;
+}
+html[data-theme="hitster"] .time-up-text{
+  color:#ff67ac !important;
+  text-shadow:3px 3px 0 #140912, 6px 6px 0 rgba(255,215,94,.30), 0 12px 30px rgba(0,0,0,.55) !important;
 }

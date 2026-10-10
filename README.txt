@@ -164,3 +164,11 @@ v38 PWA:
 - Donkere achtergrond, donkere panelen, donkere invulvelden en donkere knoppen.
 - Gele en roze Hitster-achtige accenten blijven als merk-/partylaag.
 - Vraagvelden behouden hun functionele kleur, maar krijgen een donkerder omlijsting.
+
+
+v39 PWA:
+- Hitster-modus roze als primaire accentkleur i.p.v. geel.
+- Donkere basis en roze getinte donkere panelen.
+- Actieve opties, koppen, tandwiel, Volgende ronde, checkboxes en focusaccent roze.
+- Geel alleen subtiel secundair accent.
+- Functionele kleuren van spelers, opdrachten en groene Start/Opslaan-knop behouden.
