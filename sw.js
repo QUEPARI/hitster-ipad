@@ -1,11 +1,11 @@
-const CACHE = "hitster-ipad-v53";
+const CACHE = "hitster-ipad-v53.1";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=53",
-  "./app.js?v=53",
-  "./hitster-logo-v48.png?v=53",
-  "./manifest.webmanifest?v=53",
+  "./styles.css?v=53.1",
+  "./app.js?v=53.1",
+  "./hitster-logo-v48.png?v=53.1",
+  "./manifest.webmanifest?v=53.1",
   "./icon-180.png",
   "./icon-192.png",
   "./icon-512.png"
