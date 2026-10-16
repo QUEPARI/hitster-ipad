@@ -16,7 +16,7 @@ const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusT
 function hideTimeoutSequence(){
   if(!timeoutSequence) return;
   timeoutSequence.classList.add('hidden');
-  timeUpText?.classList.add('hidden');
+  if(timeUpText) timeUpText.classList.add('hidden');
 }
 
 function showTimeoutSequence(){
@@ -78,7 +78,7 @@ function pauseQuestionForSettings(){
 function resumeQuestionAfterSettings(){
   if(!settingsPausedQuestion || state.phase !== 'question') return;
   settingsPausedQuestion = false;
-  let left = Math.max(0, pausedQuestionRemaining ?? state.questionSeconds);
+  let left = Math.max(0, (pausedQuestionRemaining === null ? state.questionSeconds : pausedQuestionRemaining));
   pausedQuestionRemaining = null;
 
   timerText.textContent = state.showTimer ? format(left) : '';
@@ -195,7 +195,7 @@ function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence()
 manualStart.onclick=startRound;
 $$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
 function chooseWinner(i){clearQuestionTension();state.phase='winner';updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.toggle('winner',j===i);z.classList.add('disabled')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
-function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=state.question?.id;let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0]?.id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
+function refillBag(){const active=QUESTIONS.filter(q=>state.active.has(q.id));const prev=(state.question ? state.question.id : undefined);let arr=[...active];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}if(arr.length>1&&arr[0] && arr[0].id===prev)[arr[0],arr[1]]=[arr[1],arr[0]];state.bag=arr}
 function nextQuestion(){if(!state.bag.length)refillBag();return state.bag.shift()}
 
 function fitQuestionToOneLine(){
