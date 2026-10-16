@@ -49,7 +49,10 @@ function forceCloseAllModals(){
   if(settingsModal) settingsModal.classList.add('hidden');
 }
 forceCloseAllModals();
-window.addEventListener('pageshow', forceCloseAllModals);
+window.addEventListener('pageshow', ()=>{
+  forceCloseAllModals();
+  resumeQuestionAfterSettings();
+});
 
 let pausedQuestionRemaining = null;
 let questionDeadline = null;
@@ -86,7 +89,8 @@ function resumeQuestionAfterSettings(){
   updateQuestionTension();
 
   if(left <= 0){
-    startRound();
+    questionDeadline = null;
+    showTimeoutSequence();
     return;
   }
 
@@ -97,8 +101,7 @@ function resumeQuestionAfterSettings(){
     if(state.showTimer) timerText.textContent = format(remaining);
     if(remaining <= 0){
       questionDeadline = null;
-      if(state.auto) startRound();
-      else showIdle();
+      showTimeoutSequence();
       return;
     }
     state.timer = setTimeout(tick, 250);
@@ -146,7 +149,11 @@ function renderQuestions(){const c=$('#questionOptions');c.innerHTML='';QUESTION
 function syncSettings(){
   state.auto=true;
   state.winnerSeconds=2;
-  state.questionSeconds=Math.max(5,+$('#questionSeconds').value||30);
+  const secondsInput=$('#questionSeconds');
+  const seconds=Number(secondsInput.value);
+  state.questionSeconds=Number.isFinite(seconds) && secondsInput.value.trim() !== ''
+    ? Math.min(300,Math.max(5,Math.round(seconds))) : 30;
+  secondsInput.value=String(state.questionSeconds);
   state.showTimer=$('#showTimer').checked;
   manualStart.classList.add('hidden');
 }
