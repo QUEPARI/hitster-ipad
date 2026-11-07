@@ -1,4 +1,4 @@
-const APP_VERSION = 'v56 PWA';
+const APP_VERSION = 'v57 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -234,7 +234,8 @@ function startGameSafely(){
 const startGameButton=$('#startGame');
 let lastStartActivation=0;
 function activateStart(event){
-  if(event && event.cancelable && event.type==='touchend') event.preventDefault();
+  if(event && event.type==='pointerdown' && event.button!==undefined && event.button!==0) return;
+  if(event && event.cancelable && (event.type==='touchend'||event.type==='pointerdown')) event.preventDefault();
   const now=Date.now();
   if(now-lastStartActivation<850) return;
   lastStartActivation=now;
@@ -245,6 +246,8 @@ function activateStart(event){
   startGameSafely();
 }
 if(startGameButton){
+  // Start on contact: Android can suppress the later click while closing the keyboard.
+  startGameButton.addEventListener('pointerdown',activateStart,{passive:false});
   startGameButton.addEventListener('touchend',activateStart,{passive:false});
   startGameButton.addEventListener('click',activateStart);
 }

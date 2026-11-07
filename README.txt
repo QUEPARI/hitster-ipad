@@ -243,3 +243,8 @@ v55 PWA:
 v56 PWA:
 - Ontbrekende groottehandgreep in een oudere pagina blokkeert de JavaScript-initialisatie niet meer.
 - Android-touchstart gecontroleerd met 2, 4 en 6 spelers, inclusief een pagina zonder handgreep.
+
+
+v57 PWA:
+- Start spel reageert direct op pointerdown, met touchend/click als terugval en bescherming tegen dubbel starten.
+- Android-start gecontroleerd zonder opvolgende click/touchend.
