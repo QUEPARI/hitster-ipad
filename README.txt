@@ -223,3 +223,12 @@ v52: Winnaarsnaam heeft exact hetzelfde font, formaat en animatie als TIJD IS OM
 v53 PWA:
 - Winnaar heeft dezelfde witte/lichtroze letters, letteromranding, grootte en animatie als TIJD IS OM!. Alleen neon-gloed in spelerskleur.
 - Android-diagnose toont een specifieke stap indien de knop aantoonbaar wordt aangeraakt maar het startscherm blijft staan.
+
+
+
+v54 PWA:
+- Aantal spelers: 1 tot en met 6.
+- Ronde knoppen met spelersnamen en zes kleuren.
+- Kort indrukken en loslaten buzzert; 500 ms vasthouden geeft een witte rand en maakt verplaatsen mogelijk.
+- Posities blijven gedurende het spel behouden, ook bij draaien van het scherm.
+- Offline-cache bijgewerkt naar v54.

@@ -1704,3 +1704,16 @@ html[data-theme="hitster"] #winnerView {
 html[data-theme="hitster"] #timeUpText {
   text-shadow:0 0 2px #FFF,0 0 6px #E5007D,0 0 13px #E5007D,0 0 24px rgba(229,0,125,.8) !important;
 }
+
+
+/* v54: free-positioned circular buzzers for one to six players. */
+#playerCount{grid-template-columns:repeat(6,minmax(0,1fr));}
+#playerCount button{padding:12px 0;min-width:0;}
+.setup-screen{overflow:auto;}
+.move-hint{text-align:center;color:#c5d6df;font-size:14px;line-height:1.4;}
+#board.board{display:block!important;}
+#board.board .player-zone{position:absolute!important;border-radius:50%!important;min-height:0!important;min-width:0!important;grid-area:auto!important;transform:none!important;display:block;font-size:clamp(16px,2.5vw,26px);font-weight:800;padding:16px;overflow-wrap:anywhere;box-shadow:0 8px 24px #0006,inset 0 3px 0 #ffffff55;touch-action:none;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none;}
+#board.board .player-zone[hidden]{display:none!important;}
+#board.board .player-zone.dragging{z-index:40;outline:4px solid white;box-shadow:0 0 28px #fff8;cursor:grabbing;}
+#board .player-zone.p5{background:#8B5CF6!important;color:white!important;}
+#board .player-zone.p6{background:#21C998!important;color:#111!important;}

@@ -1,4 +1,4 @@
-const APP_VERSION = 'v53 PWA';
+const APP_VERSION = 'v54 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -8,7 +8,7 @@ const QUESTIONS=[
   {id:'three',text:'3 JAAR ERVOOR OF ERNA',color:'#00acc1'},
   {id:'sing',text:'ZING MEE',color:'#fdd835',dark:true}
 ];
-const state={count:4,names:['Speler 1','Speler 2','Speler 3','Speler 4'],phase:'setup',winner:null,question:null,bag:[],timer:null,auto:true,winnerSeconds:2,questionSeconds:30,showTimer:true,active:new Set(QUESTIONS.map(q=>q.id))};
+const state={count:4,names:['Speler 1','Speler 2','Speler 3','Speler 4','Speler 5','Speler 6'],phase:'setup',winner:null,question:null,bag:[],timer:null,auto:true,winnerSeconds:2,questionSeconds:30,showTimer:true,active:new Set(QUESTIONS.map(q=>q.id))};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const setup=$('#setup'),game=$('#game'),board=$('#board'),statusText=$('#statusText'),winnerView=$('#winnerView'),questionView=$('#questionView'),winnerMini=$('#winnerMini'),questionBox=$('#questionBox'),questionText=$('#questionText'),timerText=$('#timerText'),nextRound=$('#nextRound'),manualStart=$('#manualStart'),timeoutSequence=$('#timeoutSequence'),timeUpText=$('#timeUpText');
 
@@ -213,6 +213,7 @@ function startGameSafely(){
     $$('.player-zone').forEach(z=>z.classList.remove('winner','disabled','phase-hidden'));
     setup.classList.add('hidden');
     game.classList.remove('hidden');
+    layoutPlayers();
     window.__hitsterStartStage = 'Spelscherm geopend';
     state.phase='idle';
     updateSettingsGear();
@@ -251,9 +252,73 @@ if(startGameButton){
 function showIdle(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='idle';updateSettingsGear();statusText.textContent='Klaar voor volgende ronde';statusText.classList.remove('hidden');winnerView.classList.add('hidden');board.classList.remove('winner-phase');questionView.classList.add('hidden');$$('.player-zone').forEach(z=>{z.classList.add('disabled');z.classList.remove('phase-hidden')});manualStart.classList.add('hidden')}
 function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='open';updateSettingsGear();state.winner=null;statusText.textContent='';statusText.classList.add('hidden');winnerView.classList.add('hidden');questionView.classList.add('hidden');manualStart.classList.add('hidden');$$('.player-zone').forEach((z,i)=>{z.classList.toggle('disabled',i>=state.count);z.classList.remove('winner','phase-hidden')})}
 manualStart.onclick=startRound;
-$$('.player-zone').forEach((z,i)=>{const down=e=>{e.preventDefault();if(state.phase!=='open'||i>=state.count)return;chooseWinner(i)};z.addEventListener('pointerdown',down,{passive:false})});
+// A short press buzzes on release; a hold enters positioning mode.
+const playerPositions = {};
+let activePlayerPress = null;
+function layoutPlayers(){
+  const rect=board.getBoundingClientRect();
+  const size=Math.min(180, rect.width/3.6, rect.height/3.6);
+  $$('.player-zone').forEach((z,i)=>{
+    z.hidden=i>=state.count;
+    z.style.display=i>=state.count?'none':'block';
+    z.textContent=state.names[i]||('Speler '+(i+1));
+    z.style.width=size+'px';z.style.height=size+'px';
+    const key=state.count+':'+i;
+    const cols=state.count===1?1:2;
+    const rows=Math.ceil(state.count/cols);
+    const pos=playerPositions[key]||{x:((i%cols)+.5)/cols,y:(Math.floor(i/cols)+.5)/rows};
+    const x=Math.max(12,Math.min(rect.width-size-12,pos.x*rect.width-size/2));
+    const y=Math.max(12,Math.min(rect.height-size-12,pos.y*rect.height-size/2));
+    z.style.left=x+'px';z.style.top=y+'px';
+  });
+}
+function cancelPlayerPress(){
+  if(!activePlayerPress)return;
+  clearTimeout(activePlayerPress.timer);
+  activePlayerPress.zone.classList.remove('dragging');
+  activePlayerPress=null;
+}
+$$('.player-zone').forEach((z,i)=>{
+  z.addEventListener('contextmenu',e=>e.preventDefault());
+  z.addEventListener('pointerdown',e=>{
+    if(state.phase!=='open'||i>=state.count||activePlayerPress)return;
+    e.preventDefault();
+    z.setPointerCapture(e.pointerId);
+    const rect=z.getBoundingClientRect();
+    const press={zone:z,id:e.pointerId,startX:e.clientX,startY:e.clientY,dx:e.clientX-rect.left,dy:e.clientY-rect.top,dragging:false,moved:false};
+    activePlayerPress=press;
+    press.timer=setTimeout(()=>{press.dragging=true;z.classList.add('dragging');},500);
+  });
+  z.addEventListener('pointermove',e=>{
+    const p=activePlayerPress;
+    if(!p||p.zone!==z||p.id!==e.pointerId)return;
+    e.preventDefault();
+    if(!p.dragging){
+      if(Math.abs(e.clientX-p.startX)+Math.abs(e.clientY-p.startY)>12){p.moved=true;clearTimeout(p.timer);}
+      return;
+    }
+    const rect=board.getBoundingClientRect();
+    const x=Math.max(12,Math.min(rect.width-z.offsetWidth-12,e.clientX-rect.left-p.dx));
+    const y=Math.max(12,Math.min(rect.height-z.offsetHeight-12,e.clientY-rect.top-p.dy));
+    z.style.left=x+'px';z.style.top=y+'px';
+    playerPositions[state.count+':'+i]={x:(x+z.offsetWidth/2)/rect.width,y:(y+z.offsetHeight/2)/rect.height};
+  });
+  z.addEventListener('pointerup',e=>{
+    const p=activePlayerPress;
+    if(!p||p.zone!==z||p.id!==e.pointerId)return;
+    const buzz=!p.dragging&&!p.moved&&state.phase==='open';
+    cancelPlayerPress();
+    if(buzz)chooseWinner(i);
+  });
+  z.addEventListener('pointercancel',cancelPlayerPress);
+  z.addEventListener('lostpointercapture',cancelPlayerPress);
+  z.addEventListener('click',e=>{if(e.detail===0&&state.phase==='open'&&i<state.count)chooseWinner(i);});
+});
+window.addEventListener('blur',cancelPlayerPress);
+window.addEventListener('resize',()=>{if(!game.classList.contains('hidden'))layoutPlayers();});
+
 function chooseWinner(i){clearQuestionTension();state.phase='winner';board.classList.add('winner-phase');updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.remove('winner');z.classList.add('disabled','phase-hidden')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];
-const playerColors=['#E5007D','#009EE3','#FFED00','#E94C15'];
+const playerColors=['#E5007D','#009EE3','#FFED00','#E94C15','#8B5CF6','#21C998'];
 const winnerColor=playerColors[i]||playerColors[0];
 winnerView.style.setProperty('--winner-color',winnerColor);
 winnerView.classList.remove('hidden');questionView.classList.add('hidden');state.timer=setTimeout(showQuestion,2000)}
@@ -402,7 +467,7 @@ function showQuestion(){board.classList.remove('winner-phase');state.phase='ques
 function format(s){return `${Math.floor(s/60)}:${('0'+(s%60)).slice(-2)}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
-function resetToSetup(){clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
+function resetToSetup(){cancelPlayerPress();clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
 
 window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToOneLine()});
 
@@ -420,3 +485,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 // v50: succesvolle volledige initialisatie van de app-code.
 window.__hitsterReady = true;
+
