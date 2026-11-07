@@ -1,11 +1,11 @@
-const CACHE = "hitster-ipad-v53.1";
+const CACHE = "hitster-ipad-v54";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=53.1",
-  "./app.js?v=53.1",
-  "./hitster-logo-v48.png?v=53.1",
-  "./manifest.webmanifest?v=53.1",
+  "./styles.css?v=54",
+  "./app.js?v=54",
+  "./hitster-logo-v48.png?v=54",
+  "./manifest.webmanifest?v=54",
   "./icon-180.png",
   "./icon-192.png",
   "./icon-512.png"
@@ -55,3 +55,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+

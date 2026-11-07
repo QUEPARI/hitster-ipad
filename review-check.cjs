@@ -9,11 +9,11 @@ function run(file, count) {
     const classes = new Set(['#game', '#questionView', '#winnerView'].includes(key) ? ['hidden'] : []);
     const e = { value: key === '#questionSeconds' ? '30' : '', checked: true, dataset: {}, style: {setProperty(){}},
       classList: { add: (...xs) => xs.forEach(x => classes.add(x)), remove: (...xs) => xs.forEach(x => classes.delete(x)), contains: x => classes.has(x), toggle: (x, on) => { if(on) classes.add(x); else classes.delete(x); } },
-      addEventListener() {}, appendChild() {}, querySelector: () => el(key + '/input') };
+      getBoundingClientRect:()=>({width:1024,height:768,left:0,top:0}), offsetWidth:180,offsetHeight:180,setPointerCapture(){}, addEventListener(n,f) {this[n]=f;}, appendChild() {}, querySelector: () => el(key + '/input') };
     elements.set(key, e); return e;
   }
-  const zones = Array.from({length:4}, (_,i) => el('zone'+i));
-  const inputs = Array.from({length:4}, (_,i) => {const e=el('#nameFields input:nth-child('+(i+1)+')');e.value='Naam '+(i+1);return e;});
+  const zones = Array.from({length:6}, (_,i) => el('zone'+i));
+  const inputs = Array.from({length:6}, (_,i) => {const e=el('#nameFields input:nth-child('+(i+1)+')');e.value='Naam '+(i+1);return e;});
   const document = {querySelector: el, querySelectorAll: s => s === '.player-zone' ? zones : s === '#nameFields input' ? inputs : [], getElementById: id => el('#'+id), createElement: () => el('created'+Math.random()), addEventListener() {}, documentElement:{setAttribute(){}},body:el('body')};
   const ctx = vm.createContext({document,window:{addEventListener:(n,f)=>events[n]=f},Date:{now:()=>now},setTimeout:(f,ms)=>{tasks.set(++timerId,{f,ms});return timerId},clearTimeout:id=>tasks.delete(id),requestAnimationFrame:()=>1,cancelAnimationFrame(){},getComputedStyle:()=>({paddingLeft:'0',paddingRight:'0',fontSize:'20'})});
   vm.runInContext(fs.readFileSync(file,'utf8'),ctx);
@@ -34,7 +34,7 @@ function run(file, count) {
 
 
 const file=__dirname+'/app.js';
-for(const count of [2,3,4]) run(file,count);
+for(const count of [1,2,3,4,5,6]) run(file,count);
 const a=run(file,4);
 a.eval('startGameSafely(); chooseWinner(0); showQuestion(); pauseQuestionForSettings(); resumeQuestionAfterSettings()');
 a.setTime(41000);a.tasks.get(a.eval('state.timer')).f();
@@ -54,3 +54,15 @@ for(const [input,expected] of [['999',300],['300',300],['5',5],['-1',5],['0',5],
  c.el('#questionSeconds').value=input;c.eval('syncSettings()');assert.equal(c.eval('state.questionSeconds'),expected);assert.equal(c.el('#questionSeconds').value,String(expected));
 }
 console.log('PASS: baseline 2/3/4 players, resumed expiry + 1.5s timeout, zero remaining, pageshow preserves paused time and resumes, input bounds/default/rounding. Mocked DOM, no device test.');
+
+
+const d=run(file,6);d.eval('startGameSafely()');
+assert.equal(d.eval("document.querySelectorAll('.player-zone')[5].textContent"),'Naam 6');
+d.eval("document.querySelectorAll('.player-zone')[0].pointerdown({pointerId:1,clientX:50,clientY:50,preventDefault(){}})");
+assert.equal(d.eval('state.phase'),'open');
+d.tasks.get(d.eval('activePlayerPress.timer')).f();
+d.eval("document.querySelectorAll('.player-zone')[0].pointermove({pointerId:1,clientX:400,clientY:300,preventDefault(){}}); document.querySelectorAll('.player-zone')[0].pointerup({pointerId:1})");
+assert.equal(d.eval('state.phase'),'open');assert(d.eval("playerPositions['6:0'].x")>0);
+d.eval("document.querySelectorAll('.player-zone')[5].pointerdown({pointerId:2,clientX:50,clientY:50,preventDefault(){}});document.querySelectorAll('.player-zone')[5].pointerup({pointerId:2})");
+assert.equal(d.eval('state.winner'),5);
+console.log('PASS: 1–6 players, long hold and drag without buzz, player 6 short press wins.');
