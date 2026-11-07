@@ -8,21 +8,20 @@
   <meta name="theme-color" content="#00161D" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Hitster Buzzer" />
-  <link rel="manifest" href="./manifest.webmanifest?v=54" />
+  <link rel="manifest" href="./manifest.webmanifest?v=55" />
   <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css?v=54" />
+  <link rel="stylesheet" href="./styles.css?v=55" />
 </head>
 <body>
   <main id="app">
     <section id="setup" class="screen setup-screen">
       <div class="setup-card">
         <h1 class="setup-brand" aria-label="Hitster Buzzer">
-          <img class="hitster-logo" src="./hitster-logo-v48.png?v=54" alt="Hitster" />
+          <img class="hitster-logo" src="./hitster-logo-v48.png?v=55" alt="Hitster" />
           <span class="buzzer-neon" aria-hidden="true">BUZZER</span>
         </h1>
         <div class="player-count-label">Aantal spelers</div>
         <div class="segmented" id="playerCount">
-          <button data-count="1">1</button>
           <button data-count="2">2</button>
           <button data-count="3">3</button>
           <button data-count="4" class="active">4</button>
@@ -30,7 +29,7 @@
           <button data-count="6">6</button>
         </div>
         <div id="nameFields" class="name-fields"></div>
-        <p class="move-hint">Houd een spelersknop lang ingedrukt om hem te verplaatsen.</p>
+        <p class="move-hint">Houd een spelersknop lang ingedrukt om te verplaatsen. Sleep daarna ↔ om de grootte aan te passen.</p>
         <div class="setup-actions">
           <button type="button" id="startGame" class="primary big start-game-green">Start spel</button>
           <button id="setupSettingsBtn" class="setup-gear" type="button" aria-label="Instellingen" title="Instellingen">
@@ -41,7 +40,7 @@
         </div>
         <p id="startError" class="start-error hidden" role="alert"></p>
       </div>
-      <div class="setup-version">V54 PWA</div>
+      <div class="setup-version">V55 PWA</div>
 </section>
 
     <section id="game" class="screen game-screen hidden">
@@ -55,6 +54,8 @@
 
         <button class="player-zone p5" data-player="4"></button>
         <button class="player-zone p6" data-player="5"></button>
+
+        <button id="resizePlayer" class="resize-player hidden" aria-label="Grootte spelersknop aanpassen" title="Sleep om de grootte aan te passen">↔</button>
 
         <div id="centerPanel" class="center-panel">
           <div id="statusText" class="status-text">Klaar</div>
@@ -97,7 +98,7 @@
       <button id="saveSettings" class="save-settings full">Opslaan</button>
       <button id="resetBtn" class="danger full settings-reset">Reset spel</button>
 
-      <div class="app-version" id="appVersion">Versie: v54 PWA</div>
+      <div class="app-version" id="appVersion">Versie: v55 PWA</div>
     </div>
   </div>
 
@@ -136,10 +137,10 @@
       }, 1200);
     });
   </script>
-  <script src="./app.js?v=54"></script>
+  <script src="./app.js?v=55"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=54'));
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=55'));
     }
   </script>
 </body>

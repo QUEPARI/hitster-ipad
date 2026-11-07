@@ -1,4 +1,4 @@
-const APP_VERSION = 'v54 PWA';
+const APP_VERSION = 'v55 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -254,16 +254,55 @@ function startRound(){clearQuestionTension();clearTimers();hideTimeoutSequence()
 manualStart.onclick=startRound;
 // A short press buzzes on release; a hold enters positioning mode.
 const playerPositions = {};
+const playerSizes = {};
+const resizePlayer = $('#resizePlayer');
+let selectedPlayer = null;
+let resizePress = null;
+function closePlayerEditor(){
+  selectedPlayer=null;resizePress=null;
+  resizePlayer.classList.add('hidden');
+}
+function updateResizeHandle(){
+  if(selectedPlayer===null)return;
+  const z=$$('.player-zone')[selectedPlayer];
+  resizePlayer.style.left=(parseFloat(z.style.left)+parseFloat(z.style.width)-32)+'px';
+  resizePlayer.style.top=(parseFloat(z.style.top)+parseFloat(z.style.height)/2-24)+'px';
+}
+resizePlayer.addEventListener('pointerdown',e=>{
+  if(selectedPlayer===null||state.phase!=='open')return;
+  e.preventDefault();
+  const z=$$('.player-zone')[selectedPlayer];
+  const rect=board.getBoundingClientRect();
+  resizePress={id:e.pointerId,startX:e.clientX,size:parseFloat(z.style.width),cx:parseFloat(z.style.left)+parseFloat(z.style.width)/2,cy:parseFloat(z.style.top)+parseFloat(z.style.height)/2,max:Math.min(rect.width,rect.height)};
+  resizePlayer.setPointerCapture(e.pointerId);
+});
+resizePlayer.addEventListener('pointermove',e=>{
+  const p=resizePress;
+  if(!p||p.id!==e.pointerId)return;
+  e.preventDefault();
+  const rect=board.getBoundingClientRect();
+  const size=Math.max(64,Math.min(p.max-24,p.size+2*(e.clientX-p.startX)));
+  const z=$$('.player-zone')[selectedPlayer];
+  const x=Math.max(12,Math.min(rect.width-size-12,p.cx-size/2));
+  const y=Math.max(12,Math.min(rect.height-size-12,p.cy-size/2));
+  z.style.width=size+'px';z.style.height=size+'px';z.style.left=x+'px';z.style.top=y+'px';
+  const key=state.count+':'+selectedPlayer;
+  playerSizes[key]=size/Math.min(rect.width,rect.height);
+  playerPositions[key]={x:(x+size/2)/rect.width,y:(y+size/2)/rect.height};
+  updateResizeHandle();
+});
+['pointerup','pointercancel','lostpointercapture'].forEach(type=>resizePlayer.addEventListener(type,()=>{resizePress=null;}));
 let activePlayerPress = null;
 function layoutPlayers(){
   const rect=board.getBoundingClientRect();
-  const size=Math.min(180, rect.width/3.6, rect.height/3.6);
+  const defaultSize=Math.min(180, rect.width/3.6, rect.height/3.6);
   $$('.player-zone').forEach((z,i)=>{
     z.hidden=i>=state.count;
     z.style.display=i>=state.count?'none':'block';
     z.textContent=state.names[i]||('Speler '+(i+1));
-    z.style.width=size+'px';z.style.height=size+'px';
     const key=state.count+':'+i;
+    const size=Math.max(64,Math.min(Math.min(rect.width,rect.height)-24,playerSizes[key] ? playerSizes[key]*Math.min(rect.width,rect.height) : defaultSize));
+    z.style.width=size+'px';z.style.height=size+'px';
     const cols=state.count===1?1:2;
     const rows=Math.ceil(state.count/cols);
     const pos=playerPositions[key]||{x:((i%cols)+.5)/cols,y:(Math.floor(i/cols)+.5)/rows};
@@ -271,6 +310,7 @@ function layoutPlayers(){
     const y=Math.max(12,Math.min(rect.height-size-12,pos.y*rect.height-size/2));
     z.style.left=x+'px';z.style.top=y+'px';
   });
+  updateResizeHandle();
 }
 function cancelPlayerPress(){
   if(!activePlayerPress)return;
@@ -283,11 +323,12 @@ $$('.player-zone').forEach((z,i)=>{
   z.addEventListener('pointerdown',e=>{
     if(state.phase!=='open'||i>=state.count||activePlayerPress)return;
     e.preventDefault();
+    closePlayerEditor();
     z.setPointerCapture(e.pointerId);
     const rect=z.getBoundingClientRect();
     const press={zone:z,id:e.pointerId,startX:e.clientX,startY:e.clientY,dx:e.clientX-rect.left,dy:e.clientY-rect.top,dragging:false,moved:false};
     activePlayerPress=press;
-    press.timer=setTimeout(()=>{press.dragging=true;z.classList.add('dragging');},500);
+    press.timer=setTimeout(()=>{press.dragging=true;z.classList.add('dragging');selectedPlayer=i;resizePlayer.classList.remove('hidden');updateResizeHandle();},500);
   });
   z.addEventListener('pointermove',e=>{
     const p=activePlayerPress;
@@ -302,6 +343,7 @@ $$('.player-zone').forEach((z,i)=>{
     const y=Math.max(12,Math.min(rect.height-z.offsetHeight-12,e.clientY-rect.top-p.dy));
     z.style.left=x+'px';z.style.top=y+'px';
     playerPositions[state.count+':'+i]={x:(x+z.offsetWidth/2)/rect.width,y:(y+z.offsetHeight/2)/rect.height};
+    updateResizeHandle();
   });
   z.addEventListener('pointerup',e=>{
     const p=activePlayerPress;
@@ -314,10 +356,10 @@ $$('.player-zone').forEach((z,i)=>{
   z.addEventListener('lostpointercapture',cancelPlayerPress);
   z.addEventListener('click',e=>{if(e.detail===0&&state.phase==='open'&&i<state.count)chooseWinner(i);});
 });
-window.addEventListener('blur',cancelPlayerPress);
+window.addEventListener('blur',()=>{cancelPlayerPress();closePlayerEditor();});
 window.addEventListener('resize',()=>{if(!game.classList.contains('hidden'))layoutPlayers();});
 
-function chooseWinner(i){clearQuestionTension();state.phase='winner';board.classList.add('winner-phase');updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.remove('winner');z.classList.add('disabled','phase-hidden')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];
+function chooseWinner(i){closePlayerEditor();clearQuestionTension();state.phase='winner';board.classList.add('winner-phase');updateSettingsGear();state.winner=i;$$('.player-zone').forEach((z,j)=>{z.classList.remove('winner');z.classList.add('disabled','phase-hidden')});statusText.classList.add('hidden');winnerView.textContent=state.names[i];
 const playerColors=['#E5007D','#009EE3','#FFED00','#E94C15','#8B5CF6','#21C998'];
 const winnerColor=playerColors[i]||playerColors[0];
 winnerView.style.setProperty('--winner-color',winnerColor);
@@ -467,7 +509,7 @@ function showQuestion(){board.classList.remove('winner-phase');state.phase='ques
 function format(s){return `${Math.floor(s/60)}:${('0'+(s%60)).slice(-2)}`}
 nextRound.onclick=()=>{if(state.phase==='question')startRound()};
 function clearTimers(){if(state.timer){clearTimeout(state.timer);state.timer=null}}
-function resetToSetup(){cancelPlayerPress();clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
+function resetToSetup(){closePlayerEditor();cancelPlayerPress();clearQuestionTension();clearTimers();hideTimeoutSequence();state.phase='setup';updateSettingsGear();game.classList.add('hidden');setup.classList.remove('hidden');state.bag=[];renderNameFields()}
 
 window.addEventListener('resize',()=>{if(state.phase==='question')fitQuestionToOneLine()});
 

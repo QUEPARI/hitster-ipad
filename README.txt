@@ -232,3 +232,9 @@ v54 PWA:
 - Kort indrukken en loslaten buzzert; 500 ms vasthouden geeft een witte rand en maakt verplaatsen mogelijk.
 - Posities blijven gedurende het spel behouden, ook bij draaien van het scherm.
 - Offline-cache bijgewerkt naar v54.
+
+
+v55 PWA:
+- Keuze voor 2 tot 6 spelers.
+- Lang indrukken toont een ronde ↔-handgreep: naar rechts slepen vergroot, naar links verkleint.
+- Ronde vorm, plaats en grootte blijven tijdens het spel behouden.

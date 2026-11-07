@@ -34,7 +34,7 @@ function run(file, count) {
 
 
 const file=__dirname+'/app.js';
-for(const count of [1,2,3,4,5,6]) run(file,count);
+for(const count of [2,3,4,5,6]) run(file,count);
 const a=run(file,4);
 a.eval('startGameSafely(); chooseWinner(0); showQuestion(); pauseQuestionForSettings(); resumeQuestionAfterSettings()');
 a.setTime(41000);a.tasks.get(a.eval('state.timer')).f();
@@ -66,3 +66,15 @@ assert.equal(d.eval('state.phase'),'open');assert(d.eval("playerPositions['6:0']
 d.eval("document.querySelectorAll('.player-zone')[5].pointerdown({pointerId:2,clientX:50,clientY:50,preventDefault(){}});document.querySelectorAll('.player-zone')[5].pointerup({pointerId:2})");
 assert.equal(d.eval('state.winner'),5);
 console.log('PASS: 1–6 players, long hold and drag without buzz, player 6 short press wins.');
+
+const e=run(file,6);e.eval('startGameSafely()');
+e.eval("document.querySelectorAll('.player-zone')[0].pointerdown({pointerId:1,clientX:100,clientY:100,preventDefault(){}})");e.tasks.get(e.eval('activePlayerPress.timer')).f();
+e.eval("document.querySelectorAll('.player-zone')[0].pointerup({pointerId:1})");
+assert(!e.el('#resizePlayer').classList.contains('hidden'));
+e.el('#resizePlayer').pointerdown({pointerId:2,clientX:150,preventDefault(){}});
+e.el('#resizePlayer').pointermove({pointerId:2,clientX:200,preventDefault(){}});
+assert.equal(e.eval("parseFloat(document.querySelectorAll('.player-zone')[0].style.width)"),280);
+assert.equal(e.eval('state.phase'),'open');e.eval('layoutPlayers()');
+assert.equal(e.eval("parseFloat(document.querySelectorAll('.player-zone')[0].style.width)"),280);
+e.eval('chooseWinner(0)');assert(e.el('#resizePlayer').classList.contains('hidden'));
+console.log('PASS: long press exposes resize handle, resizing preserves circle and size, no buzz, handle hidden during winner.');

@@ -1717,3 +1717,7 @@ html[data-theme="hitster"] #timeUpText {
 #board.board .player-zone.dragging{z-index:40;outline:4px solid white;box-shadow:0 0 28px #fff8;cursor:grabbing;}
 #board .player-zone.p5{background:#8B5CF6!important;color:white!important;}
 #board .player-zone.p6{background:#21C998!important;color:#111!important;}
+
+/* v55: size adjustment after long press. */
+#playerCount{grid-template-columns:repeat(5,minmax(0,1fr));}
+#board .resize-player{position:absolute;z-index:45;width:48px;height:48px;border-radius:50%;border:3px solid white;background:#142b36;color:white;font-size:28px;touch-action:none;cursor:ew-resize;box-shadow:0 2px 12px #0009;}
