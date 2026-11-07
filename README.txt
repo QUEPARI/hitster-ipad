@@ -248,3 +248,9 @@ v56 PWA:
 v57 PWA:
 - Start spel reageert direct op pointerdown, met touchend/click als terugval en bescherming tegen dubbel starten.
 - Android-start gecontroleerd zonder opvolgende click/touchend.
+
+
+v58 PWA:
+- Oorzaak Android-startfout hersteld: compacte schermopmaak hield het verborgen beginscherm zichtbaar.
+- Verborgen schermen hebben nu voorrang op responsive display-regels.
+- Android-start getest bij 360x640, 640x360 en 412x839.
