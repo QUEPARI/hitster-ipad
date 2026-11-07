@@ -1,4 +1,4 @@
-const APP_VERSION = 'v58 PWA';
+const APP_VERSION = 'v59 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -206,6 +206,7 @@ function startGameSafely(){
       const value=field ? field.value.trim() : '';
       state.names[i]=value||('Speler '+(i+1));
     }
+    if(document.activeElement && typeof document.activeElement.blur==='function') document.activeElement.blur();
     window.__hitsterStartStage = 'Namen verwerkt';
     syncSettings();
     window.__hitsterStartStage = 'Instellingen verwerkt';

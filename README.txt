@@ -254,3 +254,9 @@ v58 PWA:
 - Oorzaak Android-startfout hersteld: compacte schermopmaak hield het verborgen beginscherm zichtbaar.
 - Verborgen schermen hebben nu voorrang op responsive display-regels.
 - Android-start getest bij 360x640, 640x360 en 412x839.
+
+
+v59 PWA:
+- Speelveld vastgezet binnen de zichtbare app; scroll- en doorsleepgebaren op het speelveld geblokkeerd.
+- Naamveld verliest focus bij starten om het schermtoetsenbord te sluiten.
+- Beginscherm en instellingen behouden hun eigen scrollgebied.

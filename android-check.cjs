@@ -22,6 +22,16 @@ const assert=require('node:assert/strict');
    assert.equal(await page.locator('#game').evaluate(el=>el.getBoundingClientRect().top),0);
    assert.equal(await page.locator('.player-zone:visible').count(),count);
    assert.equal(await page.locator('.p1').innerText(),'Android');
+   const dimensions=await page.evaluate(()=>{
+    const game=document.querySelector('#game'),board=document.querySelector('#board');
+    window.scrollTo(0,200);game.scrollTop=200;board.scrollTop=200;
+    return {pageY:window.scrollY,gameY:game.scrollTop,boardY:board.scrollTop,
+     gameHeight:game.getBoundingClientRect().height,boardHeight:board.getBoundingClientRect().height,
+     touch:getComputedStyle(board).touchAction,focusedInput:document.activeElement.tagName==='INPUT'};
+   });
+   assert.equal(dimensions.pageY,0);assert.equal(dimensions.gameY,0);assert.equal(dimensions.boardY,0);
+   assert.equal(dimensions.gameHeight,viewport.height);assert.equal(dimensions.boardHeight,viewport.height);
+   assert.equal(dimensions.touch,'none');assert.equal(dimensions.focusedInput,false);
    assert.deepEqual(errors,[]);
    await page.close();
   }
