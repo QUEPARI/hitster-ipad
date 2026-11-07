@@ -238,3 +238,8 @@ v55 PWA:
 - Keuze voor 2 tot 6 spelers.
 - Lang indrukken toont een ronde ↔-handgreep: naar rechts slepen vergroot, naar links verkleint.
 - Ronde vorm, plaats en grootte blijven tijdens het spel behouden.
+
+
+v56 PWA:
+- Ontbrekende groottehandgreep in een oudere pagina blokkeert de JavaScript-initialisatie niet meer.
+- Android-touchstart gecontroleerd met 2, 4 en 6 spelers, inclusief een pagina zonder handgreep.

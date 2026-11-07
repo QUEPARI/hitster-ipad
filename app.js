@@ -1,4 +1,4 @@
-const APP_VERSION = 'v55 PWA';
+const APP_VERSION = 'v56 PWA';
 const QUESTIONS=[
   {id:'multi',text:'EÉN OF MEERDERE ARTIESTEN',color:'#7e57c2'},
   {id:'decade',text:'DECENNIUM',color:'#2979ff'},
@@ -255,7 +255,22 @@ manualStart.onclick=startRound;
 // A short press buzzes on release; a hold enters positioning mode.
 const playerPositions = {};
 const playerSizes = {};
-const resizePlayer = $('#resizePlayer');
+// Older cached pages may not contain the newly introduced resize control.
+// Create it before registering handlers so initialization can always finish.
+const resizePlayer = ensureResizePlayer();
+function ensureResizePlayer(){
+  let control=$('#resizePlayer');
+  if(!control){
+    control=document.createElement('button');
+    control.id='resizePlayer';
+    control.type='button';
+    control.className='resize-player hidden';
+    control.textContent='↔';
+    control.setAttribute('aria-label','Grootte spelersknop aanpassen');
+    board.appendChild(control);
+  }
+  return control;
+}
 let selectedPlayer = null;
 let resizePress = null;
 function closePlayerEditor(){
